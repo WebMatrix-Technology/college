@@ -17,18 +17,43 @@ import {
   Zap 
 } from "lucide-react";
 
-// --- DATA SOURCE ---
+// --- EXPANDED DATA SOURCE ---
 const staffData = [
+  // --- HR Unit ---
   { id: 101, name: "Anjali Verma", role: "Chief HR Officer", dept: "HR", email: "anjali.v@vit.edu", status: "Active", phone: "+91 9833602082" },
   { id: 102, name: "Karan Malhotra", role: "Talent Acquisition Head", dept: "HR", email: "karan.m@vit.edu", status: "Active", phone: "+91 9833602083" },
   { id: 103, name: "Ishita Gupta", role: "HR Assistant", dept: "HR", email: "ishita.g@vit.edu", status: "Active", phone: "+91 9833602084" },
+  { id: 104, name: "Rohit Sharma", role: "Employee Relations", dept: "HR", email: "rohit.s@vit.edu", status: "Active", phone: "+91 9833602071" },
+  { id: 105, name: "Megha Rao", role: "Onboarding Specialist", dept: "HR", email: "megha.r@vit.edu", status: "Active", phone: "+91 9833602072" },
+
+  // --- Placement Unit ---
   { id: 201, name: "Vikram Mehta", role: "Director of Placements", dept: "Placement", email: "vikram.m@vit.edu", status: "On Leave", phone: "+91 9833602085" },
   { id: 202, name: "Siddharth Roy", role: "Corporate Relations Head", dept: "Placement", email: "sid.r@vit.edu", status: "Active", phone: "+91 9833602086" },
+  { id: 203, name: "Ananya Iyer", role: "Placement Coordinator", dept: "Placement", email: "ananya.i@vit.edu", status: "Active", phone: "+91 9833602087" },
+  { id: 204, name: "Rohan Deshmukh", role: "Industry Relations Lead", dept: "Placement", email: "rohan.d@vit.edu", status: "Active", phone: "+91 9833602073" },
+
+  // --- Admission Unit ---
   { id: 301, name: "Priya Das", role: "Head of Admissions", dept: "Admission", email: "priya.d@vit.edu", status: "Active", phone: "+91 9833602088" },
+  { id: 302, name: "Sameer Khan", role: "Admission Counselor", dept: "Admission", email: "sameer.k@vit.edu", status: "Active", phone: "+91 9833602089" },
+  { id: 303, name: "Kavita Reddy", role: "Information Desk Incharge", dept: "Admission", email: "kavita.r@vit.edu", status: "Active", phone: "+91 9833602074" },
+
+  // --- Finance Unit ---
   { id: 401, name: "Suresh Gupta", role: "Chief Finance Officer", dept: "Finance", email: "suresh.g@vit.edu", status: "Active", phone: "+91 9833602090" },
+  { id: 402, name: "Neha Patil", role: "Senior Accountant", dept: "Finance", email: "neha.p@vit.edu", status: "Active", phone: "+91 9833602094" },
+  { id: 403, name: "Manish Shah", role: "Auditor", dept: "Finance", email: "manish.s@vit.edu", status: "On Leave", phone: "+91 9833602075" },
+
+  // --- Teaching Unit ---
   { id: 501, name: "Dr. Rajesh Sharma", role: "Dean of Academics", dept: "Teaching", email: "rajesh.s@vit.edu", status: "Active", phone: "+91 9833602091" },
   { id: 502, name: "Dr. Sunita Rao", role: "Head of Dept (CSE)", dept: "Teaching", email: "sunita.r@vit.edu", status: "Active", phone: "+91 9833602092" },
+  { id: 503, name: "Dr. Arun Kumar", role: "Senior Professor", dept: "Teaching", email: "arun.k@vit.edu", status: "Active", phone: "+91 9833602095" },
+  { id: 504, name: "Prof. Deepa Nair", role: "Assistant Professor", dept: "Teaching", email: "deepa.n@vit.edu", status: "Active", phone: "+91 9833602096" },
+  { id: 505, name: "Dr. Amit Shah", role: "Research Head", dept: "Teaching", email: "amit.s@vit.edu", status: "Active", phone: "+91 9833602076" },
+
+  // --- Non-Teaching Unit ---
   { id: 601, name: "Ramesh Kumar", role: "Chief Administrator", dept: "Non-Teaching", email: "ramesh.k@vit.edu", status: "Active", phone: "+91 9833602093" },
+  { id: 602, name: "Sunil Verma", role: "IT Infrastructure Lead", dept: "Non-Teaching", email: "sunil.v@vit.edu", status: "Active", phone: "+91 9833602097" },
+  { id: 603, name: "Geeta Singh", role: "Library Custodian", dept: "Non-Teaching", email: "geeta.s@vit.edu", status: "Active", phone: "+91 9833602098" },
+  { id: 604, name: "Harish Patil", role: "Security & Facility Head", dept: "Non-Teaching", email: "harish.p@vit.edu", status: "Active", phone: "+91 9833602077" },
 ];
 
 const departments = [
@@ -41,10 +66,8 @@ const departments = [
 ];
 
 export default function StaffDirectory() {
-  // FIXED: Initialized with empty string to prevent controlled/uncontrolled error
   const [searchTerm, setSearchTerm] = useState("");
 
-  // --- FUNCTIONAL HANDLERS ---
   const handleOnboard = () => {
     alert("SYSTEM PROTOCOL: Initializing Secure Onboarding Module...");
   };
@@ -92,10 +115,7 @@ export default function StaffDirectory() {
             type="text"
             placeholder="Search name, role, or department..."
             className="w-full pl-12 pr-6 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl text-[10px] font-bold uppercase tracking-widest focus:border-orange-500 focus:bg-white outline-none transition-all"
-            
-            // FIXED: Ensured value is never undefined
             value={searchTerm || ""} 
-            
             onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
           />
         </div>

@@ -7,7 +7,8 @@ import Navbar from "@/components/landing/Navbar";
 import { 
   BookOpen, Calendar, Bell, FileText, 
   Download, GraduationCap, Laptop, 
-  Clock, ArrowUpRight, Zap, MessageCircle, LogOut 
+  Clock, ArrowUpRight, Zap, MessageCircle, LogOut,
+  Trophy, UserCheck, ClipboardList
 } from "lucide-react";
 
 export default function StudentsCorner() {
@@ -23,6 +24,13 @@ export default function StudentsCorner() {
     { title: "Exam Schedule", detail: "Finals: April 10", Icon: Calendar, color: "bg-blue-600", link: "/students-corner/exams" },
     { title: "Course Content", detail: "24 New Modules", Icon: BookOpen, color: "bg-orange-600", link: "/students-corner/courses" },
     { title: "Fee Portal", detail: "Sem 4 Pending", Icon: Zap, color: "bg-purple-600", link: "/students-corner/fees" },
+  ];
+
+  // --- NEW LIVE STATUS DATA ---
+  const liveStatus = [
+    { title: "Placement Drive", detail: "Microsoft: Feb 20", Icon: Trophy, color: "bg-emerald-600", link: "/students-corner/placements" },
+    { title: "Live Attendance", detail: "Current: 85%", Icon: UserCheck, color: "bg-slate-800", link: "/students-corner/attendance" },
+    { title: "Assignments", detail: "02 Pending Tasks", Icon: ClipboardList, color: "bg-rose-600", link: "/students-corner/assignments" },
   ];
 
   const sidebarLinks = [
@@ -70,6 +78,8 @@ export default function StudentsCorner() {
       {/* --- DASHBOARD GRID --- */}
       <section className="py-12 max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8 space-y-8">
+          
+          {/* PRIMARY ACTIONS GRID */}
           <div className="grid md:grid-cols-3 gap-6">
             {primaryActions.map((item, i) => (
               <Link href={item.link} key={i}>
@@ -87,6 +97,29 @@ export default function StudentsCorner() {
                   <div className="relative z-10">
                     <h3 className="text-2xl font-black uppercase tracking-tight leading-none">{item.title}</h3>
                     <p className="text-[10px] font-bold uppercase tracking-widest mt-2 opacity-80">{item.detail}</p>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+
+          {/* LIVE STATUS NODES (Placement, Attendance, Assignments) */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {liveStatus.map((item, i) => (
+              <Link href={item.link} key={i}>
+                <motion.div 
+                  whileHover={{ y: -5 }}
+                  className="bg-white border border-slate-100 p-6 shadow-lg flex items-center gap-4 group cursor-pointer relative overflow-hidden"
+                >
+                  <div className={`${item.color} p-3 text-white rounded-sm`}>
+                    <item.Icon size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-none">{item.title}</h4>
+                    <p className="text-sm font-black uppercase italic mt-1 text-slate-800">{item.detail}</p>
+                  </div>
+                  <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight size={14} className="text-orange-600" />
                   </div>
                 </motion.div>
               </Link>
@@ -144,7 +177,7 @@ export default function StudentsCorner() {
       </section>
 
       <footer className="py-12 border-t border-slate-100 text-center">
-         <p className="text-[10px] font-black text-slate-300 uppercase tracking-[1em]">Vanguard Student Node • 2026</p>
+          <p className="text-[10px] font-black text-slate-300 uppercase tracking-[1em]">Vanguard Student Node • 2026</p>
       </footer>
     </main>
   );

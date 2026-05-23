@@ -73,7 +73,7 @@ export default function PayrollPage() {
         ['Special Allowance', `INR ${specialAllowance.toLocaleString()}`],
         ['Gross Earnings', `INR ${gross.toLocaleString()}`],
       ],
-      headStyles: { fillStyle: 'F', fillColor: [51, 65, 85] }, // Slate-700
+      headStyles: { fillColor: [51, 65, 85] }, // Slate-700
     });
 
     autoTable(doc, {
@@ -85,7 +85,7 @@ export default function PayrollPage() {
         ['Professional Tax', `INR ${profTax.toLocaleString()}`],
         ['Total Deductions', `INR ${totalDeductions.toLocaleString()}`],
       ],
-      headStyles: { fillStyle: 'F', fillColor: [234, 88, 12] }, // Orange-600
+      headStyles: { fillColor: [234, 88, 12] }, // Orange-600
     });
 
     // 5. Net Pay Summary
