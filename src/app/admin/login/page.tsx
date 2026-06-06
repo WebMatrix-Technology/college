@@ -41,6 +41,27 @@ export default function AdminLoginPage() {
       else if (role.includes("ADMISSION") || role === "COUNSELOR" || role === "ASSISTANT") {
         router.push("/admin/admission/dashboard");
       } 
+      else if (role === "super_admin") {
+        router.push("/admin/super-admin/dashboard");
+      }
+      else if (role === "college_admin") {
+        router.push("/admin/college-admin/dashboard");
+      }
+      else if (role === "hod") {
+        router.push("/admin/hod/dashboard");
+      }
+      else if (role === "examination") {
+        router.push("/admin/examination/dashboard");
+      }
+      else if (role === "accountant") {
+        router.push("/admin/accountant/dashboard");
+      }
+      else if (role === "librarian") {
+        router.push("/admin/librarian/dashboard");
+      }
+      else if (role === "placement") {
+        router.push("/admin/placement/dashboard");
+      }
       else {
         router.push("/admin/dashboard");
       }
@@ -103,9 +124,19 @@ export default function AdminLoginPage() {
                 onChange={(e) => setRole(e.target.value)}
                 className="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-[11px] font-black uppercase tracking-wider outline-none focus:border-orange-500 focus:bg-white transition-all cursor-pointer text-slate-800"
               >
+                <optgroup label="Leadership & Management">
+                  <option value="super_admin">Super Admin (SaaS Owner)</option>
+                  <option value="college_admin">College Admin (Principal/Registrar)</option>
+                  <option value="hod">HOD (Head of Department)</option>
+                </optgroup>
+
                 <optgroup label="Core Departments">
                   <option value="hr">Human Resources (HR)</option>
                   <option value="it_admin">System Admin</option>
+                  <option value="examination">Examination Cell</option>
+                  <option value="accountant">Accountant</option>
+                  <option value="librarian">Librarian</option>
+                  <option value="placement">Placement Officer</option>
                 </optgroup>
                 
                 {/* NEW ADMISSION ROLES */}
