@@ -10,7 +10,7 @@ export default function LandingPage() {
     <main className="relative min-h-screen bg-white overflow-hidden">
       
       {/* --- ULTRA-MODERN HERO SECTION --- */}
-      <section className="relative h-[95vh] flex items-center justify-center bg-slate-950">
+      <section className="relative min-h-[95vh] flex items-center justify-center bg-slate-950 pt-32 pb-40">
         {/* Animated Background Overlay */}
         <div className="absolute inset-0 z-0">
           <motion.div 
@@ -34,7 +34,7 @@ export default function LandingPage() {
             <span className="inline-block px-4 py-1.5 mb-6 border border-orange-500/30 bg-orange-500/10 rounded-full text-orange-500 text-[10px] font-black uppercase tracking-[0.4em]">
               The Future of Learning
             </span>
-            <h1 className="text-[clamp(3.5rem,12vw,11rem)] font-black text-white uppercase italic tracking-tighter leading-[0.85]">
+            <h1 className="text-[clamp(2.5rem,10vw,11rem)] font-black text-white uppercase italic tracking-tighter leading-[0.85] break-words sm:break-normal">
               VIT <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-yellow-400 to-orange-600">UNLIMITED.</span>
             </h1>
             
@@ -104,7 +104,7 @@ export default function LandingPage() {
               
               <div className="space-y-10">
                  <span className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px]">Academic Prowess</span>
-                 <h2 className="text-6xl font-black uppercase tracking-tighter italic leading-none">
+                 <h2 className="text-[clamp(3rem,8vw,4rem)] font-black uppercase tracking-tighter italic leading-none">
                     Engineering <br /> <span className="text-orange-600 underline decoration-slate-100 underline-offset-8">Humanity.</span>
                  </h2>
                  <p className="text-slate-500 text-lg font-medium leading-relaxed">
