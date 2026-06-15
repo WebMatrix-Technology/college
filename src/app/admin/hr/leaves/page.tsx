@@ -54,7 +54,7 @@ export default function HRLeavePage() {
   });
 
   return (
-    <div className="p-4 lg:p-8 bg-slate-50 min-h-screen">
+    <div className="p-4 md:p-6 lg:p-12 bg-slate-50 min-h-screen">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
         <div>

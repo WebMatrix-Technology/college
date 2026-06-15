@@ -4,24 +4,75 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { 
-  ShieldAlert, Lock, UserCheck, ArrowRight, ArrowLeft, Loader2 
+  ShieldAlert, Lock, UserCheck, ArrowRight, ArrowLeft, Loader2, ChevronDown
 } from "lucide-react";
 
 export default function AdminLoginPage() {
-  const [role, setRole] = useState("hr");
-  const [adminId, setAdminId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [error, setError] = useState("");
+  const [isDemoMenuOpen, setIsDemoMenuOpen] = useState(false);
   const router = useRouter();
+
+  // Mock database mapping emails to roles
+  const mockUsers: Record<string, string> = {
+    "super@vanguard.com": "super_admin",
+    "admin@vanguard.com": "college_admin",
+    "hod.it@vanguard.com": "hod_IT",
+    "hod.law@vanguard.com": "hod_Law",
+    "hod.commerce@vanguard.com": "hod_Commerce",
+    "hod.science@vanguard.com": "hod_Science",
+    "hod.socialscience@vanguard.com": "hod_Social Science",
+    "hod.management@vanguard.com": "hod_Management",
+    "coordinator.btech@vanguard.com": "coordinator_B.Tech",
+    "coordinator.llb@vanguard.com": "coordinator_LLB",
+    "coordinator.mba@vanguard.com": "coordinator_MBA",
+    "batch.btech.y1@vanguard.com": "batch_coordinator_B.Tech_Year 1",
+    "batch.llb.y2@vanguard.com": "batch_coordinator_LLB_Year 2",
+    "hr@vanguard.com": "hr",
+    "exam@vanguard.com": "examination",
+    "accounts@vanguard.com": "accountant",
+    "library@vanguard.com": "librarian",
+    "placement@vanguard.com": "placement",
+    "admission@vanguard.com": "ADMISSION_HEAD",
+    "counselor@vanguard.com": "COUNSELOR",
+    "assistant@vanguard.com": "ASSISTANT",
+    "it@vanguard.com": "it_admin"
+  };
 
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    if (!adminId || !password) {
+    if (!email || !password) {
       setError("Please input valid personnel credentials.");
       return;
+    }
+
+    const assignedRole = mockUsers[email.toLowerCase()];
+
+    if (!assignedRole) {
+      setError("Unauthorized email or invalid credentials.");
+      return;
+    }
+
+    let actualRole = assignedRole;
+    let deptContext = "";
+    let coordinatorCourse = "";
+    let coordinatorBatch = "";
+
+    if (assignedRole.startsWith("hod_")) {
+      actualRole = "hod";
+      deptContext = assignedRole.replace("hod_", "");
+    } else if (assignedRole.startsWith("batch_coordinator_")) {
+      actualRole = "batch_coordinator";
+      const parts = assignedRole.replace("batch_coordinator_", "").split("_");
+      coordinatorCourse = parts[0];
+      coordinatorBatch = parts[1];
+    } else if (assignedRole.startsWith("coordinator_")) {
+      actualRole = "course_coordinator";
+      coordinatorCourse = assignedRole.replace("coordinator_", "");
     }
 
     setIsAuthenticating(true);
@@ -32,34 +83,59 @@ export default function AdminLoginPage() {
       
       // Save state for RBAC (Role Based Access Control)
       localStorage.setItem("isAdminLoggedIn", "true");
-      localStorage.setItem("adminRole", role);
+      localStorage.setItem("adminRole", actualRole);
+      
+      if (actualRole === "hod") {
+        localStorage.setItem("hodDepartment", deptContext);
+      }
+      if (actualRole === "course_coordinator" || actualRole === "batch_coordinator") {
+        localStorage.setItem("coordinatorCourse", coordinatorCourse);
+        if (actualRole === "batch_coordinator") {
+           localStorage.setItem("coordinatorBatch", coordinatorBatch);
+        }
+      }
       
       // REDIRECTION LOGIC
-      if (role === "hr") {
+      if (actualRole === "hr") {
         router.push("/admin/hr/dashboard");
       } 
-      else if (role.includes("ADMISSION") || role === "COUNSELOR" || role === "ASSISTANT") {
+      else if (actualRole.includes("ADMISSION") || actualRole === "COUNSELOR" || actualRole === "ASSISTANT") {
         router.push("/admin/admission/dashboard");
       } 
-      else if (role === "super_admin") {
+      else if (actualRole === "super_admin") {
         router.push("/admin/super-admin/dashboard");
       }
-      else if (role === "college_admin") {
+      else if (actualRole === "college_admin") {
         router.push("/admin/college-admin/dashboard");
       }
-      else if (role === "hod") {
+      else if (actualRole === "hod") {
         router.push("/admin/hod/dashboard");
       }
-      else if (role === "examination") {
+      else if (actualRole === "course_coordinator") {
+        router.push("/admin/coordinator/dashboard");
+      }
+      else if (actualRole === "batch_coordinator") {
+        router.push("/admin/batch-coordinator/dashboard");
+      }
+      else if (actualRole.includes("ADMISSION") || actualRole === "COUNSELOR" || actualRole === "ASSISTANT") {
+        router.push("/admin/admission/dashboard");
+      } 
+      else if (actualRole === "super_admin") {
+        router.push("/admin/super-admin/dashboard");
+      }
+      else if (actualRole === "college_admin") {
+        router.push("/admin/college-admin/dashboard");
+      }
+      else if (actualRole === "examination") {
         router.push("/admin/examination/dashboard");
       }
-      else if (role === "accountant") {
+      else if (actualRole === "accountant") {
         router.push("/admin/accountant/dashboard");
       }
-      else if (role === "librarian") {
+      else if (actualRole === "librarian") {
         router.push("/admin/librarian/dashboard");
       }
-      else if (role === "placement") {
+      else if (actualRole === "placement") {
         router.push("/admin/placement/dashboard");
       }
       else {
@@ -102,6 +178,45 @@ export default function AdminLoginPage() {
           {/* Form Content */}
           <form className="p-8 space-y-5 bg-white" onSubmit={handleAdminLogin}>
             
+            {/* Demo Credentials Selector */}
+            <div className="relative z-20">
+              <button
+                type="button"
+                onClick={() => setIsDemoMenuOpen(!isDemoMenuOpen)}
+                className="w-full flex items-center justify-between bg-orange-50 border border-orange-100 p-3 rounded-xl text-[10px] font-black uppercase tracking-widest text-orange-600 hover:bg-orange-100 transition-colors"
+              >
+                <span>Select Demo Credentials</span>
+                <ChevronDown size={14} className={`transition-transform ${isDemoMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {isDemoMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-100 shadow-xl rounded-xl overflow-hidden max-h-48 overflow-y-auto custom-scrollbar"
+                  >
+                    {Object.keys(mockUsers).map((mockEmail) => (
+                      <button
+                        key={mockEmail}
+                        type="button"
+                        onClick={() => {
+                          setEmail(mockEmail);
+                          setPassword("password123");
+                          setIsDemoMenuOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-orange-50 hover:text-orange-600 border-b border-slate-50 last:border-0 transition-colors flex justify-between"
+                      >
+                        <span>{mockUsers[mockEmail].replace(/_/g, " ").toUpperCase()}</span>
+                        <span className="text-slate-400 font-normal truncate max-w-[120px]">{mockEmail}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
             {/* Error Notification */}
             <AnimatePresence mode="wait">
               {error && (
@@ -116,49 +231,17 @@ export default function AdminLoginPage() {
               )}
             </AnimatePresence>
 
-            {/* Role Selection */}
+            {/* Email Input */}
             <div className="space-y-2">
-              <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1">Administrative Role</label>
-              <select 
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-[11px] font-black uppercase tracking-wider outline-none focus:border-orange-500 focus:bg-white transition-all cursor-pointer text-slate-800"
-              >
-                <optgroup label="Leadership & Management">
-                  <option value="super_admin">Super Admin (SaaS Owner)</option>
-                  <option value="college_admin">College Admin (Principal/Registrar)</option>
-                  <option value="hod">HOD (Head of Department)</option>
-                </optgroup>
-
-                <optgroup label="Core Departments">
-                  <option value="hr">Human Resources (HR)</option>
-                  <option value="it_admin">System Admin</option>
-                  <option value="examination">Examination Cell</option>
-                  <option value="accountant">Accountant</option>
-                  <option value="librarian">Librarian</option>
-                  <option value="placement">Placement Officer</option>
-                </optgroup>
-                
-                {/* NEW ADMISSION ROLES */}
-                <optgroup label="Admission Node">
-                  <option value="ADMISSION_HEAD">Admission Head</option>
-                  <option value="COUNSELOR">Admission Counselor</option>
-                  <option value="ASSISTANT">Admission Assistant</option>
-                </optgroup>
-              </select>
-            </div>
-
-            {/* ID Input */}
-            <div className="space-y-2">
-              <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1">Personnel ID</label>
+              <label className="text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1">Official Email</label>
               <div className="relative group">
                 <UserCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-orange-600 transition-colors" size={18} />
                 <input 
-                  type="text"
+                  type="email"
                   required
-                  placeholder="VNG-XXXX"
-                  value={adminId}
-                  onChange={(e) => setAdminId(e.target.value)}
+                  placeholder="admin@vanguard.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-4 pl-12 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xs font-bold outline-none focus:border-orange-500 focus:bg-white text-slate-900 transition-all"
                 />
               </div>

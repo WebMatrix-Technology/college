@@ -2,15 +2,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Grid, BookOpen, Clock, Users, MapPin } from "lucide-react";
 
 export default function DraftTimetablePage() {
+  const router = useRouter();
   return (
     <div className="p-6 lg:p-12 font-sans min-h-screen">
       <div className="mb-10">
-        <Link href="/admin/college-admin/timetable" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 transition-colors mb-6">
-          <ArrowLeft size={14} /> Back to Master Timetable
-        </Link>
+        <button onClick={() => router.push("/admin/college-admin/timetable")} className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 transition-colors mb-6 cursor-pointer bg-transparent border-none">
+          <ArrowLeft size={14} /> Back
+        </button>
         <h1 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900 flex items-center gap-4">
           <Grid size={36} className="text-orange-600" />
           Draft <span className="text-orange-600">Schedule</span>

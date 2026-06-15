@@ -68,7 +68,7 @@ export default function AdmissionDashboard() {
       {role && <AdmissionSidebar role={role} />}
 
       {/* 2. MAIN TERMINAL */}
-      <main className="flex-1 ml-72 p-4 lg:p-10 relative">
+      <main className="flex-1 ml-0 md:ml-72 p-4 md:p-6 lg:p-10 relative">
         
         {/* Ambient Glows */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">

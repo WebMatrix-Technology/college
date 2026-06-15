@@ -100,12 +100,14 @@ export default function HRPage() {
             </p>
           </div>
 
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="px-8 py-4 bg-slate-950 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95"
-          >
-            <UserPlus size={16} /> Onboard Member
-          </button>
+          <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="w-full sm:w-auto justify-center px-8 py-4 bg-slate-950 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95"
+            >
+              <UserPlus size={16} /> Onboard Member
+            </button>
+          </div>
         </div>
 
         {/* --- METRICS HUB --- */}
@@ -173,7 +175,7 @@ export default function HRPage() {
         {/* --- MAIN LEDGER TABLE --- */}
         <div className="bg-white rounded-[2.5rem] border border-slate-200/60 shadow-2xl shadow-slate-200/30 overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left">
+            <table className="w-full text-left min-w-[800px]">
               <thead>
                 <tr className="bg-slate-50/50 border-b border-slate-100">
                   <th className="p-8 text-[10px] font-black uppercase text-slate-400 tracking-[0.3em]">Identity Node</th>

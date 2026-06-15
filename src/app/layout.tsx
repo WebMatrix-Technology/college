@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./globals.css"; 
 import Navbar from "@/components/landing/Navbar";
+import ToastContainer from "@/components/Toast";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {!isAdminPage && <Navbar {...({ isScrolled } as any)} />}
               
               {children}
+              <ToastContainer />
             </motion.div>
           )}
         </AnimatePresence>

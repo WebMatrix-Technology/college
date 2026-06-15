@@ -21,7 +21,7 @@ const NODES = [
 
 export default function SuperAdminDashboard() {
   return (
-    <main className="min-h-screen p-6 lg:p-12 font-sans">
+    <main className="min-h-screen p-4 md:p-6 lg:p-12 font-sans">
       
       {/* --- HEADER --- */}
       <header className="mb-16">

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   LayoutDashboard, Building2, CreditCard, Users, 
   LineChart, Settings, ShieldAlert, Database, 
-  LifeBuoy, LogOut, Menu, X 
+  LifeBuoy, LogOut
 } from "lucide-react";
 
 const menuItems = [
@@ -22,39 +22,14 @@ const menuItems = [
 ];
 
 export default function SuperAdminSidebar() {
-  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   return (
     <>
-      {/* Mobile Menu Toggle Button */}
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-[60] p-3 bg-slate-900 text-white rounded-xl shadow-lg"
-      >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
-
-      {/* Mobile Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 lg:hidden"
-          />
-        )}
-      </AnimatePresence>
-
       {/* Sidebar Container */}
-      <aside className={`
-        fixed lg:static inset-y-0 left-0 z-50
-        w-64 bg-slate-900 text-slate-300 flex flex-col border-r border-slate-800
-        transition-transform duration-300 ease-in-out
-        ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-      `}>
+      <aside className="
+        w-72 bg-slate-900 text-slate-300 flex flex-col min-h-screen border-r border-slate-800
+      ">
         <div className="p-6 flex items-center gap-3 border-b border-slate-800">
           <div className="w-8 h-8 bg-orange-600 rounded flex items-center justify-center font-black text-white italic">V</div>
           <div>
@@ -67,7 +42,7 @@ export default function SuperAdminSidebar() {
           {menuItems.map((item) => {
             const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/admin/super-admin/dashboard");
             return (
-              <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)}>
+              <Link key={item.name} href={item.href}>
                 <div className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
                   isActive ? "bg-orange-600 text-white shadow-lg shadow-orange-600/20" : "hover:bg-slate-800 hover:text-white"
                 }`}>

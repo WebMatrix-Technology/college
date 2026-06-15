@@ -148,15 +148,16 @@ export default function PayrollPage() {
 
       {/* Table */}
       <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl overflow-hidden">
-        <div className="p-8 border-b border-slate-100 flex justify-between items-center">
+        <div className="p-8 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <h2 className="font-black text-slate-900 uppercase italic text-xl">Records</h2>
             <input 
-               className="px-6 py-3 bg-slate-50 border-2 border-slate-50 rounded-2xl text-[10px] font-bold"
+               className="w-full sm:w-auto px-6 py-3 bg-slate-50 border-2 border-slate-50 rounded-2xl text-[10px] font-bold"
                placeholder="SEARCH STAFF..."
                onChange={(e) => setSearchTerm(e.target.value)}
             />
         </div>
-        <table className="w-full text-left">
+        <div className="overflow-x-auto">
+        <table className="w-full text-left min-w-[700px]">
           <thead className="bg-slate-50/50">
             <tr>
               <th className="p-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">Personnel</th>
@@ -194,6 +195,7 @@ export default function PayrollPage() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

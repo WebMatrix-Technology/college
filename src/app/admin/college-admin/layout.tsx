@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import CollegeAdminSidebar from "@/components/admin/CollegeAdminSidebar";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu } from "lucide-react";
 
 export default function CollegeAdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // In a real app, you would verify a JWT or session token.
@@ -32,9 +34,43 @@ export default function CollegeAdminLayout({ children }: { children: React.React
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50 font-sans selection:bg-blue-200 selection:text-blue-900">
-      <CollegeAdminSidebar />
-      <main className="flex-1 h-screen overflow-y-auto overflow-x-hidden relative">
+    <div className="flex flex-col md:flex-row min-h-screen bg-slate-50 font-sans selection:bg-blue-200 selection:text-blue-900">
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between p-4 bg-slate-900 text-white z-50 sticky top-0 shadow-lg">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-600/30">
+            <span className="text-white font-black text-xs">C</span>
+          </div>
+          <div>
+            <h1 className="text-sm font-black uppercase tracking-tighter text-white leading-none">Vanguard</h1>
+            <p className="text-[8px] font-black uppercase tracking-widest text-blue-400 mt-0.5">College Admin</p>
+          </div>
+        </div>
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+        >
+           <Menu size={24} />
+        </button>
+      </div>
+
+      {/* Sidebar Wrapper */}
+      <div className={`
+        fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0
+        ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+      `}>
+        <CollegeAdminSidebar />
+      </div>
+
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-30 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <main className="flex-1 h-[calc(100vh-64px)] md:h-screen overflow-y-auto overflow-x-hidden relative">
         <AnimatePresence mode="wait">
           <motion.div
             key="college-admin-content"
@@ -42,7 +78,7 @@ export default function CollegeAdminLayout({ children }: { children: React.React
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="w-full h-full"
+            className="w-full min-h-full"
           >
             {children}
           </motion.div>

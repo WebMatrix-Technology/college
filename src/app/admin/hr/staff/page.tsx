@@ -99,12 +99,14 @@ export default function StaffDirectory() {
           </p>
         </div>
         
-        <button 
-          onClick={handleOnboard}
-          className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/20 active:scale-95"
-        >
-          <UserPlus size={18} /> Onboard Member
-        </button>
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto mt-4 md:mt-0">
+          <button 
+            onClick={handleOnboard}
+            className="w-full sm:w-auto justify-center px-8 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/20 active:scale-95"
+          >
+            <UserPlus size={18} /> Onboard Member
+          </button>
+        </div>
       </div>
 
       {/* --- SEARCH HUB --- */}

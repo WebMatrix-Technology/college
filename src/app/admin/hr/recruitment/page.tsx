@@ -189,7 +189,7 @@ export default function RecruitmentPage() {
           </p>
         </motion.div>
         
-        <button className="px-8 py-5 bg-slate-950 text-white rounded-[1.5rem] font-black text-[10px] uppercase tracking-[0.2em] flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl active:scale-95">
+        <button className="w-full md:w-auto justify-center px-8 py-5 bg-slate-950 text-white rounded-[1.5rem] font-black text-[10px] uppercase tracking-[0.2em] flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl active:scale-95">
           <UserPlus size={18} /> Initiate Onboarding
         </button>
       </div>
@@ -212,7 +212,7 @@ export default function RecruitmentPage() {
         </div>
 
         <div className="overflow-x-auto min-h-[500px]">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left border-collapse min-w-[800px]">
             <thead>
               <tr className="bg-slate-50/80 border-b border-slate-100">
                 <th className="p-8 text-[10px] font-black uppercase text-slate-400 tracking-[0.4em]">Candidate Dossier</th>

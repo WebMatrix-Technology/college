@@ -9,7 +9,6 @@ import {
   Settings, LogOut, ArrowUpRight, Bell, 
   ClipboardList, Briefcase, Mail 
 } from "lucide-react";
-
 export default function FacultyDashboard() {
   const router = useRouter();
 
