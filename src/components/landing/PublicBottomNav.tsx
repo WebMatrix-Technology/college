@@ -107,11 +107,15 @@ export default function PublicBottomNav() {
                    );
                  })}
                </div>
-               <div className="p-4 border-t border-white/10">
+               <div className="p-4 border-t border-white/10 grid grid-cols-2 gap-3">
+                 <Link href="/admissions" onClick={() => setIsMoreOpen(false)}>
+                   <button className="w-full flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-white text-slate-900 hover:bg-slate-200 transition-colors border border-white">
+                     <span className="text-[10px] font-black uppercase tracking-widest text-center">Apply Now</span>
+                   </button>
+                 </Link>
                  <Link href="/login" onClick={() => setIsMoreOpen(false)}>
-                   <button className="w-full flex items-center justify-center gap-2 p-4 rounded-2xl bg-orange-600/10 text-orange-500 hover:bg-orange-600/20 transition-colors border border-orange-500/20">
-                     <LogIn size={16} />
-                     <span className="text-xs font-black uppercase tracking-widest">Login Portals</span>
+                   <button className="w-full flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-orange-600/10 text-orange-500 hover:bg-orange-600/20 transition-colors border border-orange-500/20">
+                     <span className="text-[10px] font-black uppercase tracking-widest text-center">Login Portals</span>
                    </button>
                  </Link>
                </div>
