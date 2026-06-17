@@ -205,7 +205,7 @@ export default function AdmissionPage() {
  border-radius: 1rem;
  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
  padding: 16px;
- width: 300px;
+ width: min(300px, 85vw);
  display: grid !important;
  grid-template-columns: repeat(4, 1fr);
  gap: 8px;
@@ -268,10 +268,9 @@ export default function AdmissionPage() {
 
  {/* APPLICATION CONTAINER */}
  <section className="max-w-[1200px] mx-auto px-6 -mt-10 mb-32 relative z-20">
- <div className="bg-white rounded-[3rem] shadow-[0_20px_60px_rgb(0,0,0,0.05)] border border-slate-100 overflow-hidden flex flex-col md:flex-row min-h-[700px]">
- 
- {/* LEFT SIDEBAR: PROGRESS TRACKER */}
- <div className="w-full md:w-[320px] bg-slate-50 border-r border-slate-100 p-10 flex flex-col">
+  <div className="bg-white rounded-[3rem] shadow-[0_20px_60px_rgb(0,0,0,0.05)] border border-slate-100 flex flex-col md:flex-row min-h-[700px] relative z-20">
+  {/* LEFT SIDEBAR: PROGRESS TRACKER */}
+  <div className="w-full md:w-[320px] shrink-0 bg-slate-50 md:border-r border-b md:border-b-0 border-slate-100 p-8 md:p-10 flex flex-col rounded-t-[3rem] md:rounded-tr-none md:rounded-l-[3rem]">
  <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-10">Application Progress</h3>
  
  <div className="flex flex-col gap-8 relative">
@@ -306,8 +305,8 @@ export default function AdmissionPage() {
  </div>
  </div>
 
- {/* RIGHT CONTENT: FORM WIZARD */}
- <div className="flex-1 p-8 md:p-16 flex flex-col bg-white">
+  {/* RIGHT CONTENT: FORM WIZARD */}
+  <div className="flex-1 p-6 md:p-16 flex flex-col bg-white rounded-b-[3rem] md:rounded-bl-none md:rounded-r-[3rem]">
  <AnimatePresence mode="wait">
  <motion.div 
  key={currentStep} 
@@ -354,7 +353,7 @@ export default function AdmissionPage() {
  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-2">Phone Number *</label>
  <input name="phone" placeholder="+1 (555) 000-0000" onChange={handleInputChange} value={formData.phone} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 font-bold focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all" />
  </div>
- <div className="space-y-1.5 md:col-span-2 grid grid-cols-2 gap-6">
+ <div className="space-y-1.5 md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
  <div className="space-y-1.5">
  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-2">Region/State *</label>
  <CustomSelect 
@@ -389,7 +388,7 @@ export default function AdmissionPage() {
 
  <div className="space-y-4">
  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-2">Program Level</label>
- <div className="grid grid-cols-2 gap-4">
+ <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  {Object.keys(PROGRAMS).map((type) => (
  <button 
  key={type} 
@@ -495,7 +494,7 @@ export default function AdmissionPage() {
  <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 space-y-8">
  <div>
  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">Personal Details</h4>
- <div className="grid grid-cols-2 gap-y-4">
+ <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-4">
  <div><span className="block text-xs text-slate-500 mb-1">Full Name</span><span className="font-bold text-slate-900">{formData.fullName}</span></div>
  <div><span className="block text-xs text-slate-500 mb-1">Email</span><span className="font-bold text-slate-900">{formData.email}</span></div>
  <div><span className="block text-xs text-slate-500 mb-1">Phone</span><span className="font-bold text-slate-900">{formData.phone}</span></div>
@@ -506,7 +505,7 @@ export default function AdmissionPage() {
  
  <div>
  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-200 pb-2">Academic Selection</h4>
- <div className="grid grid-cols-2 gap-y-4">
+ <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-4">
  <div><span className="block text-xs text-slate-500 mb-1">Program Type</span><span className="font-bold text-slate-900">{formData.programType}</span></div>
  <div><span className="block text-xs text-slate-500 mb-1">Selected Course</span><span className="font-bold text-orange-600">{formData.selectedCourse}</span></div>
  </div>

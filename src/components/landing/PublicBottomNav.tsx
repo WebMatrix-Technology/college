@@ -12,7 +12,7 @@ const primaryLinks = [
   { name: "Home", icon: Home, href: "/" },
   { name: "Programs", icon: BookOpen, href: "/programs" },
   { name: "Campus", icon: Building2, href: "/campus" },
-  { name: "Careers", icon: Briefcase, href: "/placements" },
+  { name: "Careers", icon: Briefcase, href: "/careers" },
 ];
 
 const secondaryLinks = [

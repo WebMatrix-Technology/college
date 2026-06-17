@@ -24,6 +24,7 @@ export default function Navbar() {
     { name: "Our People", href: "/people" },
     { name: "Achievements", href: "/achievements" },
     { name: "Events", href: "/events" },
+    { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/contact" },
   ];
 
