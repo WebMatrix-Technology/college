@@ -19,16 +19,16 @@ export default function AdmissionSidebar({ role }: { role: string }) {
   };
 
   const menuItems = [
-    { name: "Terminal Home", icon: LayoutDashboard, href: "/admin/admission/dashboard", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "ADMISSION_CLERK", "COUNSELOR", "ASSISTANT"] },
+    { name: "Terminal Home", icon: LayoutDashboard, href: "/admin/admission/dashboard", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "ADMISSION_CLERK"] },
     { name: "Global Analytics", icon: BarChart3, href: "/admin/admission/analytics", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER"] },
-    { name: "Lead Evaluation", icon: UserCheck, href: "/admin/admission/evaluation", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "COUNSELOR"] },
-    { name: "Document Sync", icon: FileText, href: "/admin/admission/documents", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "ADMISSION_CLERK", "ASSISTANT"] },
-    { name: "Node Database", icon: Database, href: "/admin/admission/database", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER"] },
-    { name: "Verify Queue", icon: ClipboardList, href: "/admin/admission/queue", roles: ["ADMISSION_CLERK", "COUNSELOR", "ASSISTANT"] },
+    { name: "Lead Evaluation", icon: UserCheck, href: "/admin/admission/evaluation", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER"] },
+    { name: "Document Sync", icon: FileText, href: "/admin/admission/documents", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "ADMISSION_CLERK"] },
+    { name: "Applicant Database", icon: Database, href: "/admin/admission/database", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER"] },
+    { name: "Verify Queue", icon: ClipboardList, href: "/admin/admission/queue", roles: ["ADMISSION_CLERK"] },
   ];
 
   return (
-    <div className="w-72 bg-slate-900 text-white min-h-screen flex flex-col font-sans border-r border-slate-800 shadow-2xl relative z-10 overflow-hidden shrink-0">
+    <div className="w-72 bg-slate-900 text-white h-full flex flex-col font-sans border-r border-slate-800 shadow-2xl relative z-10 overflow-hidden shrink-0">
       {/* Dynamic Background Effect */}
       <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-orange-600/20 to-transparent pointer-events-none" />
 

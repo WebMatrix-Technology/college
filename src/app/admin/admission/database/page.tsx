@@ -15,27 +15,33 @@ const mockDatabase = [
   { id: "VNG-105", name: "Amit Bose", course: "B.Tech Mech", status: "Pending Fee", date: "Oct 13", score: 75, phone: "+91 9876543214" },
 ];
 
-export default function NodeDatabase() {
+export default function ApplicantDatabase() {
   const [search, setSearch] = useState("");
   const [role, setRole] = React.useState<string>("");
+  const [dbData, setDbData] = useState(mockDatabase);
 
   React.useEffect(() => {
     const savedRole = localStorage.getItem("adminRole") || "ADMISSION_HEAD";
     setRole(savedRole);
+    
+    const localApps = JSON.parse(localStorage.getItem("vanguard_applications") || "[]");
+    if (localApps.length > 0) {
+      setDbData([...localApps, ...mockDatabase]);
+    }
   }, []);
 
-  const filteredDB = mockDatabase.filter(r => 
+  const filteredDB = dbData.filter(r => 
     r.name.toLowerCase().includes(search.toLowerCase()) || 
     r.id.toLowerCase().includes(search.toLowerCase()) ||
     r.course.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc] text-slate-900 font-sans overflow-x-hidden selection:bg-orange-500/30">
-      <div className="hidden md:block z-50">
+    <div className="flex h-screen bg-[#f8fafc] text-slate-900 font-sans overflow-hidden selection:bg-orange-500/30">
+      <div className="hidden md:block z-50 h-full">
         {role && <AdmissionSidebar role={role} />}
       </div>
-      <main className="flex-1 p-6 lg:p-12 relative overflow-hidden">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-6 lg:p-12 relative custom-scrollbar">
         
         {/* Ambient Gradients */}
         <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-tr from-blue-400/10 to-indigo-400/5 blur-[120px] rounded-full pointer-events-none" />
@@ -50,7 +56,7 @@ export default function NodeDatabase() {
               <div className="p-3 bg-gradient-to-br from-orange-500 to-rose-600 rounded-2xl shadow-lg shadow-orange-500/30">
                 <Database size={32} className="text-white" />
               </div>
-              Node <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-600">Database</span>
+              Applicant <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-600">Database</span>
             </h1>
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mt-4">Master Applicant Records</p>
           </div>

@@ -45,15 +45,15 @@ export default function AdmissionDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc] text-slate-900 font-sans overflow-x-hidden selection:bg-orange-500/30 selection:text-orange-900">
+    <div className="flex h-screen bg-[#f8fafc] text-slate-900 font-sans overflow-hidden selection:bg-orange-500/30 selection:text-orange-900">
       
       {/* 1. SIDEBAR */}
-      <div className="hidden md:block z-50">
+      <div className="hidden md:block z-50 h-full">
         {role && <AdmissionSidebar role={role} />}
       </div>
 
       {/* 2. MAIN CONTENT */}
-      <main className="flex-1 p-6 lg:p-12 relative overflow-hidden">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-6 lg:p-12 relative custom-scrollbar">
         
         {/* Subtle Ambient Background Gradients */}
         <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-gradient-to-br from-orange-400/10 to-rose-400/5 blur-[100px] rounded-full pointer-events-none" />

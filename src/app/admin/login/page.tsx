@@ -35,12 +35,10 @@ export default function AdminLoginPage() {
     "accounts@vanguard.com": "accountant",
     "library@vanguard.com": "librarian",
     "placement@vanguard.com": "placement",
+    "website.admin@vanguard.com": "website_admin",
     "admission@vanguard.com": "ADMISSION_HEAD",
     "admission.manager@vanguard.com": "ADMISSION_MANAGER",
-    "admission.clerk@vanguard.com": "ADMISSION_CLERK",
-    "counselor@vanguard.com": "COUNSELOR",
-    "assistant@vanguard.com": "ASSISTANT",
-    "it@vanguard.com": "it_admin"
+    "admission.clerk@vanguard.com": "ADMISSION_CLERK"
   };
 
   const handleAdminLogin = (e: React.FormEvent) => {
@@ -101,7 +99,7 @@ export default function AdminLoginPage() {
       if (actualRole === "hr") {
         router.push("/admin/hr/dashboard");
       } 
-      else if (actualRole.includes("ADMISSION") || actualRole === "COUNSELOR" || actualRole === "ASSISTANT") {
+      else if (actualRole.includes("ADMISSION")) {
         router.push("/admin/admission/dashboard");
       } 
       else if (actualRole === "super_admin") {
@@ -119,15 +117,7 @@ export default function AdminLoginPage() {
       else if (actualRole === "batch_coordinator") {
         router.push("/admin/batch-coordinator/dashboard");
       }
-      else if (actualRole.includes("ADMISSION") || actualRole === "COUNSELOR" || actualRole === "ASSISTANT") {
-        router.push("/admin/admission/dashboard");
-      } 
-      else if (actualRole === "super_admin") {
-        router.push("/admin/super-admin/dashboard");
-      }
-      else if (actualRole === "college_admin") {
-        router.push("/admin/college-admin/dashboard");
-      }
+
       else if (actualRole === "examination") {
         router.push("/admin/examination/dashboard");
       }
@@ -139,6 +129,9 @@ export default function AdminLoginPage() {
       }
       else if (actualRole === "placement") {
         router.push("/admin/placement/dashboard");
+      }
+      else if (actualRole === "website_admin") {
+        router.push("/admin/website-admin/dashboard");
       }
       else {
         router.push("/admin/dashboard");

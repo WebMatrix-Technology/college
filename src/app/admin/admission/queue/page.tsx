@@ -31,11 +31,11 @@ export default function VerifyQueue() {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc] text-slate-900 font-sans overflow-x-hidden selection:bg-orange-500/30">
-      <div className="hidden md:block z-50">
+    <div className="flex h-screen bg-[#f8fafc] text-slate-900 font-sans overflow-hidden selection:bg-orange-500/30">
+      <div className="hidden md:block z-50 h-full">
         {role && <AdmissionSidebar role={role} />}
       </div>
-      <main className="flex-1 p-6 lg:p-12 relative overflow-hidden">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-6 lg:p-12 relative custom-scrollbar">
         
         {/* Ambient Gradients */}
         <div className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-gradient-to-tr from-amber-400/10 to-orange-500/5 blur-[120px] rounded-full pointer-events-none" />

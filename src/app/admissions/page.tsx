@@ -95,10 +95,26 @@ export default function AdmissionPage() {
  return true;
  };
 
- const handleSubmit = () => {
- setIsSubmitting(true);
- setTimeout(() => { setIsSuccess(true); setIsSubmitting(false); }, 2000);
- };
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      const newApp = {
+        id: `VNG-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: formData.fullName,
+        course: formData.selectedCourse,
+        status: "Applied",
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+        score: Math.floor(60 + Math.random() * 35),
+        phone: formData.phone
+      };
+      
+      const existingApps = JSON.parse(localStorage.getItem("vanguard_applications") || "[]");
+      localStorage.setItem("vanguard_applications", JSON.stringify([newApp, ...existingApps]));
+      
+      setIsSuccess(true); 
+      setIsSubmitting(false); 
+    }, 2000);
+  };
 
  const steps = [
  { title: "Identity", icon: <User size={18} /> },
