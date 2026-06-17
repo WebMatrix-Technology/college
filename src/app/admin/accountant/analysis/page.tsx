@@ -215,7 +215,7 @@ export default function FinancialAnalysis() {
                   paddingAngle={5}
                   dataKey="value"
                   stroke="none"
-                  label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) => `${((percent || 0) * 100).toFixed(0)}%`}
                   labelLine={false}
                 >
                   {expenseBreakdown.map((entry, index) => (

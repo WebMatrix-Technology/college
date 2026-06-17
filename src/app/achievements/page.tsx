@@ -12,27 +12,30 @@ import Footer from "@/components/landing/Footer";
 
 export default function AchievementPage() {
  const institutionalAwards = [
- {
- title: "Global Tech Excellence 2025",
- org: "International Education Forum",
- desc: "Ranked #1 for AI integration in the undergraduate curriculum.",
- icon: <Trophy className="w-8 h-8" />,
- tag: "Ranked #1"
- },
- {
- title: "Sustainable Campus Award",
- org: "Green Building Council",
- desc: "Recognized for 100% solar-powered infrastructure and zero-waste systems.",
- icon: <Award className="w-8 h-8" />,
- tag: "Elite Grade"
- },
- {
- title: "Top Placement Achievement",
- org: "Corporate HR Council",
- desc: "Awarded for achieving a 98% placement rate with a high average CTC.",
- icon: <Target className="w-8 h-8" />,
- tag: "Industry Leader"
- }
+  {
+  title: "Global Tech Excellence 2025",
+  org: "International Education Forum",
+  desc: "Ranked #1 for AI integration in the undergraduate curriculum.",
+  icon: <Trophy className="w-8 h-8" />,
+  tag: "Ranked #1",
+  year: "2025"
+  },
+  {
+  title: "Sustainable Campus Award",
+  org: "Green Building Council",
+  desc: "Recognized for 100% solar-powered infrastructure and zero-waste systems.",
+  icon: <Award className="w-8 h-8" />,
+  tag: "Elite Grade",
+  year: "2024"
+  },
+  {
+  title: "Top Placement Achievement",
+  org: "Corporate HR Council",
+  desc: "Awarded for achieving a 98% placement rate with a high average CTC.",
+  icon: <Target className="w-8 h-8" />,
+  tag: "Industry Leader",
+  year: "2024"
+  }
  ];
 
  const timelineMilestones = [
@@ -151,7 +154,7 @@ export default function AchievementPage() {
  </div>
  <h3 className="text-3xl font-black uppercase tracking-tighter mb-4 relative z-10">{award.title}</h3>
  <p className={`text-[10px] font-black uppercase tracking-[0.3em] mb-6 relative z-10 ${i === 0 ? 'text-orange-400' : 'text-slate-400'}`}>
- {award.issuer} • {award.year}
+ {award.org} • {award.year}
  </p>
  <p className={`relative z-10 leading-relaxed font-medium ${i === 0 ? 'text-slate-300 max-w-xl' : 'text-slate-500'}`}>
  {award.desc}

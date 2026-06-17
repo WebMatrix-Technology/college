@@ -9,7 +9,7 @@ import WebsiteAdminSidebar from "@/components/admin/WebsiteAdminSidebar";
 import WebsiteAdminBottomNav from "@/components/admin/WebsiteAdminBottomNav";
 
 export default function WebsiteAdminDashboard() {
-  const containerVariants = {
+  const containerVariants: any = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -17,7 +17,7 @@ export default function WebsiteAdminDashboard() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
   };

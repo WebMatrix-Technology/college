@@ -173,7 +173,7 @@ export default function EventsPage() {
  >
  <div className="relative aspect-[4/3] bg-slate-200 overflow-hidden">
  <img 
- src={ev.image} 
+ src={ev.bgImage} 
  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
  alt={ev.title} 
  />
@@ -194,10 +194,10 @@ export default function EventsPage() {
  
  <div className="space-y-3 mb-8 flex-grow">
  <div className="flex items-center gap-3 text-sm text-slate-500 font-medium">
- <Calendar className="w-4 h-4 text-orange-500" /> {ev.time}
+ <Calendar className="w-4 h-4 text-orange-500" /> {ev.date}
  </div>
  <div className="flex items-center gap-3 text-sm text-slate-500 font-medium">
- <MapPin className="w-4 h-4 text-orange-500" /> {ev.venue}
+ <MapPin className="w-4 h-4 text-orange-500" /> {ev.location}
  </div>
  </div>
 
