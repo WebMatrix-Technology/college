@@ -4,14 +4,35 @@ import { motion } from "framer-motion";
 import { 
   IndianRupee, TrendingUp, AlertTriangle, 
   WalletCards, FileSpreadsheet, Plus, ArrowUpRight, CheckCircle2,
-  Clock
+  Clock, BarChart3, Activity
 } from "lucide-react";
+import { 
+  AreaChart, Area, BarChart, Bar, XAxis, YAxis, 
+  CartesianGrid, Tooltip, ResponsiveContainer, Legend 
+} from 'recharts';
 
 const recentTransactions = [
   { id: "TRX-9901", name: "Rahul Verma", type: "Tuition Fee", amount: "₹1,25,000", status: "Completed", time: "10 mins ago" },
   { id: "TRX-9902", name: "Priya Nair", type: "Hostel Fee", amount: "₹45,000", status: "Pending", time: "1 hour ago" },
   { id: "TRX-9903", name: "Vendor - TechCorp", type: "Equipment", amount: "₹8,50,000", status: "Processed", time: "3 hours ago" },
   { id: "TRX-9904", name: "Aarav Sharma", type: "Library Fine", amount: "₹500", status: "Completed", time: "5 hours ago" },
+];
+
+const cashflowData = [
+  { name: 'Jan', Revenue: 4.2, Expenses: 2.4 },
+  { name: 'Feb', Revenue: 3.8, Expenses: 2.1 },
+  { name: 'Mar', Revenue: 5.1, Expenses: 2.8 },
+  { name: 'Apr', Revenue: 4.8, Expenses: 2.2 },
+  { name: 'May', Revenue: 7.2, Expenses: 3.1 },
+  { name: 'Jun', Revenue: 8.5, Expenses: 3.4 },
+];
+
+const deptRevenueData = [
+  { name: 'Eng & Tech', Revenue: 14.5 },
+  { name: 'Business', Revenue: 8.2 },
+  { name: 'Design', Revenue: 5.1 },
+  { name: 'Law', Revenue: 4.8 },
+  { name: 'Health', Revenue: 6.3 },
 ];
 
 export default function AccountantDashboard() {
@@ -21,29 +42,14 @@ export default function AccountantDashboard() {
         <div>
           <h1 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900 flex items-center gap-4">
             <IndianRupee size={36} className="text-emerald-600" />
-            Finance <span className="text-emerald-600">Terminal</span>
+            Finance <span className="text-emerald-600">Overview</span>
           </h1>
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2">Revenue & Expenditure Management</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2">Institution-Wide Revenue & Expenditure</p>
         </div>
         <div className="flex flex-wrap md:flex-nowrap gap-2">
-           <select className="bg-white border border-slate-200 text-slate-600 px-4 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest outline-none focus:border-emerald-500 cursor-pointer">
-             <option value="">Department</option>
-             <option value="cse">Computer Science</option>
-             <option value="ece">Electronics</option>
-             <option value="me">Mechanical</option>
-           </select>
-           <select className="bg-white border border-slate-200 text-slate-600 px-4 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest outline-none focus:border-emerald-500 cursor-pointer">
-             <option value="">Course</option>
-             <option value="btech">B.Tech</option>
-             <option value="mtech">M.Tech</option>
-             <option value="bba">BBA</option>
-           </select>
-           <select className="bg-white border border-slate-200 text-slate-600 px-4 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest outline-none focus:border-emerald-500 cursor-pointer">
-             <option value="">Year</option>
-             <option value="1">1st Year</option>
-             <option value="2">2nd Year</option>
-             <option value="3">3rd Year</option>
-             <option value="4">4th Year</option>
+           <select className="bg-white border border-slate-200 text-slate-600 px-4 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest outline-none focus:border-emerald-500 cursor-pointer shadow-sm">
+             <option value="2026-2027">FY 2026-2027</option>
+             <option value="2025-2026">FY 2025-2026</option>
            </select>
            <motion.button 
              whileHover={{ scale: 1.05 }}
@@ -58,10 +64,10 @@ export default function AccountantDashboard() {
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {[
-          { label: "Today's Collection", value: "₹4.2L", icon: IndianRupee, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
-          { label: "Pending Dues", value: "₹18.5L", icon: AlertTriangle, color: "text-red-600", bg: "bg-red-50", border: "border-red-100" },
-          { label: "Payroll Cleared", value: "92%", icon: WalletCards, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
-          { label: "Monthly Growth", value: "+14%", icon: TrendingUp, color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-100" },
+          { label: "Total Revenue (YTD)", value: "₹42.5 Cr", icon: IndianRupee, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
+          { label: "Outstanding Dues", value: "₹3.2 Cr", icon: AlertTriangle, color: "text-red-600", bg: "bg-red-50", border: "border-red-100" },
+          { label: "Operational Expenses", value: "₹18.4 Cr", icon: WalletCards, color: "text-orange-600", bg: "bg-orange-50", border: "border-orange-100" },
+          { label: "Net Balance", value: "₹24.1 Cr", icon: TrendingUp, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
         ].map((stat, idx) => (
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
@@ -77,6 +83,71 @@ export default function AccountantDashboard() {
             <h3 className="text-3xl font-black italic text-slate-900">{stat.value}</h3>
           </motion.div>
         ))}
+      </div>
+
+      {/* Charts Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        
+        {/* Cashflow Area Chart */}
+        <div className="lg:col-span-2 bg-white rounded-[2.5rem] border border-slate-100 shadow-xl p-8">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 flex items-center gap-2">
+                <Activity size={16} className="text-emerald-600" /> Cashflow Analytics
+              </h3>
+              <p className="text-xs font-bold text-slate-400 mt-1">Monthly Revenue vs Expenses (in Cr)</p>
+            </div>
+          </div>
+          <div className="h-72 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={cashflowData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#059669" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#059669" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#ea580c" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#ea580c" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} dx={-10} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', fontWeight: 'bold' }}
+                  itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
+                />
+                <Legend iconType="circle" wrapperStyle={{ fontSize: '10px', fontWeight: 'bold', paddingTop: '20px' }} />
+                <Area type="monotone" dataKey="Revenue" stroke="#059669" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
+                <Area type="monotone" dataKey="Expenses" stroke="#ea580c" strokeWidth={3} fillOpacity={1} fill="url(#colorExpenses)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Dept Revenue Bar Chart */}
+        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-xl p-8">
+          <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 flex items-center gap-2 mb-1">
+            <BarChart3 size={16} className="text-blue-600" /> Dept Revenue
+          </h3>
+          <p className="text-[10px] font-bold text-slate-400 mb-8 uppercase tracking-widest">Top Performers (in Cr)</p>
+          
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={deptRevenueData} layout="vertical" margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                <XAxis type="number" hide />
+                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 900, fill: '#64748b' }} width={80} />
+                <Tooltip 
+                  cursor={{ fill: '#f8fafc' }}
+                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', fontWeight: 'bold' }}
+                />
+                <Bar dataKey="Revenue" fill="#3b82f6" radius={[0, 8, 8, 0]} barSize={20} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

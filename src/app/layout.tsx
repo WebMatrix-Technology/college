@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased selection:bg-orange-600`}>
+      <body className={`${inter.className} antialiased selection:bg-orange-600 selection:text-white`}>
         <AnimatePresence mode="wait">
           {/* Show loader only for the main landing website */}
           {loading && !isAdminPage ? (
@@ -44,10 +44,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               key="loader"
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-slate-950"
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#0a0a0a]"
             >
-              <div className="w-20 h-20 bg-orange-600 flex items-center justify-center font-black text-4xl text-white italic">
-                V
+              <div className="relative flex flex-col items-center">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="flex items-center gap-2 mb-8"
+                >
+                  <span className="font-black text-white text-5xl md:text-7xl tracking-tighter italic">VIT</span>
+                  <motion.div 
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-3 h-3 md:w-4 md:h-4 bg-orange-500 rounded-full mt-4 md:mt-6" 
+                  />
+                </motion.div>
+
+                {/* Progress Line */}
+                <div className="w-48 md:w-64 h-[2px] bg-white/10 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                    className="h-full bg-orange-500"
+                  />
+                </div>
+                
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="mt-6 text-[9px] md:text-[10px] font-bold text-white/40 uppercase tracking-[0.4em]"
+                >
+                  Engineering the future
+                </motion.span>
               </div>
             </motion.div>
           ) : (

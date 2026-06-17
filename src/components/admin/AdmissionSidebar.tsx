@@ -19,12 +19,12 @@ export default function AdmissionSidebar({ role }: { role: string }) {
   };
 
   const menuItems = [
-    { name: "Terminal Home", icon: LayoutDashboard, href: "/admin/admission/dashboard", roles: ["ADMISSION_HEAD", "COUNSELOR", "ASSISTANT"] },
-    { name: "Global Analytics", icon: BarChart3, href: "/admin/admission/analytics", roles: ["ADMISSION_HEAD"] },
-    { name: "Lead Evaluation", icon: UserCheck, href: "/admin/admission/evaluation", roles: ["ADMISSION_HEAD", "COUNSELOR"] },
-    { name: "Document Sync", icon: FileText, href: "/admin/admission/documents", roles: ["ADMISSION_HEAD", "ASSISTANT"] },
-    { name: "Node Database", icon: Database, href: "/admin/admission/database", roles: ["ADMISSION_HEAD"] },
-    { name: "Verify Queue", icon: ClipboardList, href: "/admin/admission/queue", roles: ["COUNSELOR", "ASSISTANT"] },
+    { name: "Terminal Home", icon: LayoutDashboard, href: "/admin/admission/dashboard", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "ADMISSION_CLERK", "COUNSELOR", "ASSISTANT"] },
+    { name: "Global Analytics", icon: BarChart3, href: "/admin/admission/analytics", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER"] },
+    { name: "Lead Evaluation", icon: UserCheck, href: "/admin/admission/evaluation", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "COUNSELOR"] },
+    { name: "Document Sync", icon: FileText, href: "/admin/admission/documents", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER", "ADMISSION_CLERK", "ASSISTANT"] },
+    { name: "Node Database", icon: Database, href: "/admin/admission/database", roles: ["ADMISSION_HEAD", "ADMISSION_MANAGER"] },
+    { name: "Verify Queue", icon: ClipboardList, href: "/admin/admission/queue", roles: ["ADMISSION_CLERK", "COUNSELOR", "ASSISTANT"] },
   ];
 
   return (

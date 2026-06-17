@@ -36,6 +36,8 @@ export default function AdminLoginPage() {
     "library@vanguard.com": "librarian",
     "placement@vanguard.com": "placement",
     "admission@vanguard.com": "ADMISSION_HEAD",
+    "admission.manager@vanguard.com": "ADMISSION_MANAGER",
+    "admission.clerk@vanguard.com": "ADMISSION_CLERK",
     "counselor@vanguard.com": "COUNSELOR",
     "assistant@vanguard.com": "ASSISTANT",
     "it@vanguard.com": "it_admin"

@@ -1,240 +1,132 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
-  Search, 
-  Mail, 
-  Phone, 
-  MoreVertical,
-  UserPlus, 
-  Briefcase, 
-  GraduationCap, 
-  HeartHandshake,
-  UserCheck, 
-  Coins, 
-  Settings2, 
-  ShieldCheck, 
-  Zap 
+  Users, Search, Plus, Filter, Mail, Phone, Edit3, MoreVertical, BadgeCheck
 } from "lucide-react";
 
-// --- EXPANDED DATA SOURCE ---
-const staffData = [
-  // --- HR Unit ---
-  { id: 101, name: "Anjali Verma", role: "Chief HR Officer", dept: "HR", email: "anjali.v@vit.edu", status: "Active", phone: "+91 9833602082" },
-  { id: 102, name: "Karan Malhotra", role: "Talent Acquisition Head", dept: "HR", email: "karan.m@vit.edu", status: "Active", phone: "+91 9833602083" },
-  { id: 103, name: "Ishita Gupta", role: "HR Assistant", dept: "HR", email: "ishita.g@vit.edu", status: "Active", phone: "+91 9833602084" },
-  { id: 104, name: "Rohit Sharma", role: "Employee Relations", dept: "HR", email: "rohit.s@vit.edu", status: "Active", phone: "+91 9833602071" },
-  { id: 105, name: "Megha Rao", role: "Onboarding Specialist", dept: "HR", email: "megha.r@vit.edu", status: "Active", phone: "+91 9833602072" },
-
-  // --- Placement Unit ---
-  { id: 201, name: "Vikram Mehta", role: "Director of Placements", dept: "Placement", email: "vikram.m@vit.edu", status: "On Leave", phone: "+91 9833602085" },
-  { id: 202, name: "Siddharth Roy", role: "Corporate Relations Head", dept: "Placement", email: "sid.r@vit.edu", status: "Active", phone: "+91 9833602086" },
-  { id: 203, name: "Ananya Iyer", role: "Placement Coordinator", dept: "Placement", email: "ananya.i@vit.edu", status: "Active", phone: "+91 9833602087" },
-  { id: 204, name: "Rohan Deshmukh", role: "Industry Relations Lead", dept: "Placement", email: "rohan.d@vit.edu", status: "Active", phone: "+91 9833602073" },
-
-  // --- Admission Unit ---
-  { id: 301, name: "Priya Das", role: "Head of Admissions", dept: "Admission", email: "priya.d@vit.edu", status: "Active", phone: "+91 9833602088" },
-  { id: 302, name: "Sameer Khan", role: "Admission Counselor", dept: "Admission", email: "sameer.k@vit.edu", status: "Active", phone: "+91 9833602089" },
-  { id: 303, name: "Kavita Reddy", role: "Information Desk Incharge", dept: "Admission", email: "kavita.r@vit.edu", status: "Active", phone: "+91 9833602074" },
-
-  // --- Finance Unit ---
-  { id: 401, name: "Suresh Gupta", role: "Chief Finance Officer", dept: "Finance", email: "suresh.g@vit.edu", status: "Active", phone: "+91 9833602090" },
-  { id: 402, name: "Neha Patil", role: "Senior Accountant", dept: "Finance", email: "neha.p@vit.edu", status: "Active", phone: "+91 9833602094" },
-  { id: 403, name: "Manish Shah", role: "Auditor", dept: "Finance", email: "manish.s@vit.edu", status: "On Leave", phone: "+91 9833602075" },
-
-  // --- Teaching Unit ---
-  { id: 501, name: "Dr. Rajesh Sharma", role: "Dean of Academics", dept: "Teaching", email: "rajesh.s@vit.edu", status: "Active", phone: "+91 9833602091" },
-  { id: 502, name: "Dr. Sunita Rao", role: "Head of Dept (CSE)", dept: "Teaching", email: "sunita.r@vit.edu", status: "Active", phone: "+91 9833602092" },
-  { id: 503, name: "Dr. Arun Kumar", role: "Senior Professor", dept: "Teaching", email: "arun.k@vit.edu", status: "Active", phone: "+91 9833602095" },
-  { id: 504, name: "Prof. Deepa Nair", role: "Assistant Professor", dept: "Teaching", email: "deepa.n@vit.edu", status: "Active", phone: "+91 9833602096" },
-  { id: 505, name: "Dr. Amit Shah", role: "Research Head", dept: "Teaching", email: "amit.s@vit.edu", status: "Active", phone: "+91 9833602076" },
-
-  // --- Non-Teaching Unit ---
-  { id: 601, name: "Ramesh Kumar", role: "Chief Administrator", dept: "Non-Teaching", email: "ramesh.k@vit.edu", status: "Active", phone: "+91 9833602093" },
-  { id: 602, name: "Sunil Verma", role: "IT Infrastructure Lead", dept: "Non-Teaching", email: "sunil.v@vit.edu", status: "Active", phone: "+91 9833602097" },
-  { id: 603, name: "Geeta Singh", role: "Library Custodian", dept: "Non-Teaching", email: "geeta.s@vit.edu", status: "Active", phone: "+91 9833602098" },
-  { id: 604, name: "Harish Patil", role: "Security & Facility Head", dept: "Non-Teaching", email: "harish.p@vit.edu", status: "Active", phone: "+91 9833602077" },
-];
-
-const departments = [
-  { name: "HR", icon: UserCheck, color: "text-blue-500", bg: "bg-blue-50" },
-  { name: "Placement", icon: HeartHandshake, color: "text-purple-500", bg: "bg-purple-50" },
-  { name: "Admission", icon: GraduationCap, color: "text-green-500", bg: "bg-green-50" },
-  { name: "Finance", icon: Coins, color: "text-amber-500", bg: "bg-amber-50" },
-  { name: "Teaching", icon: Briefcase, color: "text-orange-600", bg: "bg-orange-50" },
-  { name: "Non-Teaching", icon: Settings2, color: "text-slate-500", bg: "bg-slate-50" },
+const mockStaff = [
+  { id: "EMP-1001", name: "Dr. Arvind Mehta", role: "HOD - Physics", dept: "Physics", type: "Faculty", joinDate: "2015-08-01", status: "Active" },
+  { id: "EMP-1002", name: "Prof. Anjali Desai", role: "Associate Professor", dept: "Business", type: "Faculty", joinDate: "2018-06-15", status: "Active" },
+  { id: "EMP-2005", name: "Ramesh Kumar", role: "System Administrator", dept: "IT Support", type: "Staff", joinDate: "2020-01-10", status: "Active" },
+  { id: "EMP-2010", name: "Suresh Pillai", role: "Lab Assistant", dept: "Chemistry", type: "Staff", joinDate: "2023-09-01", status: "Probation" },
+  { id: "EMP-3001", name: "Meera Reddy", role: "Admissions Counselor", dept: "Administration", type: "Staff", joinDate: "2024-01-15", status: "Active" },
 ];
 
 export default function StaffDirectory() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
 
-  const handleOnboard = () => {
-    alert("SYSTEM PROTOCOL: Initializing Secure Onboarding Module...");
-  };
-
-  const handleCall = (phoneNumber: string) => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
-
-  const handleEmail = (email: string) => {
-    window.location.href = `mailto:${email}?subject=Official Inquiry - Vanguard Admin`;
-  };
-
-  const handleMore = (name: string) => {
-    alert(`FETCHING ENCRYPTED DATA: ${name.toUpperCase()} (LVL 4 AUTH REQ)`);
-  };
+  const filteredStaff = mockStaff.filter(s => 
+    s.name.toLowerCase().includes(search.toLowerCase()) || 
+    s.role.toLowerCase().includes(search.toLowerCase()) ||
+    s.dept.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="p-4 lg:p-10 bg-slate-50 min-h-screen selection:bg-orange-500 selection:text-white">
-      
-      {/* --- HEADER --- */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+    <div className="p-6 lg:p-12 font-sans min-h-screen bg-slate-50">
+      <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="h-10 w-2 bg-orange-600 rounded-full" />
-            <h1 className="text-4xl font-black text-slate-900 tracking-tighter italic uppercase">Staff Directory</h1>
-          </div>
-          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] flex items-center gap-2">
-            <ShieldCheck size={12} className="text-orange-500" /> Personnel Database Core — VANGUARD_V2
-          </p>
+          <h1 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900 flex items-center gap-4">
+            <Users size={36} className="text-rose-600" />
+            Staff <span className="text-rose-600">Directory</span>
+          </h1>
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2">Master employee database for Faculty and Staff</p>
         </div>
-        
-        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto mt-4 md:mt-0">
-          <button 
-            onClick={handleOnboard}
-            className="w-full sm:w-auto justify-center px-8 py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-3 hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/20 active:scale-95"
-          >
-            <UserPlus size={18} /> Onboard Member
+        <button className="bg-rose-600 text-white px-6 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest flex items-center gap-2 shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:bg-rose-700 transition-colors">
+          <Plus size={16} /> Add Employee
+        </button>
+      </div>
+
+      <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl overflow-hidden">
+        {/* Toolbar */}
+        <div className="p-6 border-b border-slate-100 bg-slate-50 flex flex-col xl:flex-row items-center gap-4">
+          <div className="relative w-full xl:w-96 shrink-0">
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+            <input 
+              type="text" 
+              placeholder="Search by Name, Role, or Dept..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl font-bold text-xs outline-none focus:border-rose-500 transition-colors"
+            />
+          </div>
+          <button className="w-full xl:w-auto bg-white border border-slate-200 text-slate-600 px-6 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
+            <Filter size={14} /> Filters
           </button>
         </div>
-      </div>
 
-      {/* --- SEARCH HUB --- */}
-      <div className="bg-white p-6 rounded-[2rem] border-2 border-slate-100 shadow-sm mb-12 flex flex-col md:flex-row gap-6 items-center">
-        <div className="relative flex-1 w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-          <input 
-            type="text"
-            placeholder="Search name, role, or department..."
-            className="w-full pl-12 pr-6 py-4 bg-slate-50 border-2 border-slate-50 rounded-2xl text-[10px] font-bold uppercase tracking-widest focus:border-orange-500 focus:bg-white outline-none transition-all"
-            value={searchTerm || ""} 
-            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
-          />
-        </div>
-        <div className="flex items-center gap-4 border-l-2 border-slate-100 pl-6 h-10 hidden md:flex">
-          <div className="text-right">
-            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Active Headcount</p>
-            <p className="text-xl font-black text-slate-900">{staffData.length}</p>
-          </div>
-          <div className="p-3 bg-orange-100 text-orange-600 rounded-xl animate-pulse">
-             <Zap size={20} />
-          </div>
-        </div>
-      </div>
-
-      {/* --- DEPARTMENT SECTIONS --- */}
-      <div className="space-y-16">
-        {departments.map((dept) => {
-          const filteredStaff = staffData.filter(staff => 
-            staff.dept === dept.name && 
-            (staff.name.toLowerCase().includes(searchTerm) || staff.role.toLowerCase().includes(searchTerm))
-          );
-
-          if (filteredStaff.length === 0 && searchTerm !== "") return null;
-
-          return (
-            <section key={dept.name} className="relative">
-              <div className="flex items-center gap-4 mb-8">
-                <div className={`p-4 rounded-2xl shadow-sm border border-slate-100 ${dept.bg} ${dept.color}`}>
-                  <dept.icon size={24} />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">
-                    {dept.name} <span className="text-orange-600">Unit</span>
-                  </h2>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Records: {filteredStaff.length}</p>
-                </div>
-                <div className="flex-1 h-[1px] bg-slate-200 ml-4 opacity-50" />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <AnimatePresence mode="popLayout">
-                  {filteredStaff.map((staff) => (
-                    <motion.div
-                      key={staff.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      whileHover={{ y: -8 }}
-                      className="bg-white p-8 rounded-[2rem] border-2 border-slate-50 shadow-sm hover:shadow-2xl hover:border-orange-500/20 transition-all group relative overflow-hidden"
-                    >
-                      {/* Status Tag */}
-                      <div className="absolute top-4 right-4">
-                        <span className={`text-[8px] px-2 py-1 rounded-full font-black uppercase tracking-widest border ${
-                          staff.status === 'Active' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-orange-50 text-orange-700 border-orange-200'
-                        }`}>
-                          {staff.status}
-                        </span>
+        {/* Data Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-white border-b border-slate-100">
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap">Employee Details</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap">Role / Dept</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap">Type & Tenure</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap">Contact</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-50">
+              {filteredStaff.map((staff, idx) => (
+                <motion.tr 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: idx * 0.05 }}
+                  key={staff.id} 
+                  className="bg-white hover:bg-slate-50 transition-colors group"
+                >
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
+                        <Users size={16} className="text-slate-500" />
                       </div>
-
-                      <div className="flex flex-col items-center text-center">
-                        {/* Styled Initials Avatar */}
-                        <div className="w-20 h-20 bg-slate-950 rounded-[1.5rem] flex items-center justify-center text-white font-black text-2xl italic group-hover:bg-orange-600 transition-colors shadow-lg mb-6">
-                          {staff.name.charAt(0)}
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-bold text-slate-900 leading-tight">{staff.name}</p>
+                          {staff.status === 'Active' && <BadgeCheck size={14} className="text-emerald-500" />}
                         </div>
-
-                        <h3 className="font-black text-slate-900 group-hover:text-orange-600 transition-colors uppercase tracking-tight text-lg leading-none">
-                          {staff.name}
-                        </h3>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mt-2 mb-6 h-8 flex items-center justify-center">
-                          {staff.role}
-                        </p>
-
-                        <div className="w-full pt-6 border-t border-slate-50 flex flex-col gap-3">
-                          <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500 font-bold">
-                            <Mail size={14} className="text-slate-300" /> {staff.email}
-                          </div>
-                          
-                          {/* Working Buttons */}
-                          <div className="flex gap-2 justify-center mt-2">
-                             <button 
-                               onClick={() => handleCall(staff.phone)}
-                               title="Call Personnel"
-                               className="p-3 bg-slate-50 hover:bg-orange-600 hover:text-white rounded-xl text-slate-400 transition-all shadow-sm active:scale-90"
-                             >
-                               <Phone size={16} />
-                             </button>
-                             <button 
-                               onClick={() => handleEmail(staff.email)}
-                               title="Send Official Mail"
-                               className="p-3 bg-slate-50 hover:bg-slate-950 hover:text-white rounded-xl text-slate-400 transition-all shadow-sm active:scale-90"
-                             >
-                               <Mail size={16} />
-                             </button>
-                             <button 
-                               onClick={() => handleMore(staff.name)}
-                               title="Advanced Records"
-                               className="p-3 bg-slate-50 hover:bg-slate-200 rounded-xl text-slate-400 transition-all active:scale-90"
-                             >
-                               <MoreVertical size={16} />
-                             </button>
-                          </div>
-                        </div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">{staff.id}</p>
                       </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </section>
-          );
-        })}
-      </div>
-
-      {/* --- FOOTER LOG --- */}
-      <div className="mt-20 border-t border-slate-200 pt-8 flex items-center justify-between opacity-30">
-        <p className="text-[8px] font-black text-slate-400 uppercase tracking-[0.5em]">Auth Node: VIT_ADMIN_HR_SECURE</p>
-        <p className="text-[8px] font-black text-slate-400 uppercase tracking-[0.5em]">Terminal Session: {new Date().toLocaleTimeString()}</p>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p className="text-xs font-bold text-slate-700">{staff.role}</p>
+                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{staff.dept}</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-widest mb-1 inline-block ${
+                      staff.type === 'Faculty' ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-700'
+                    }`}>
+                      {staff.type}
+                    </span>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Joined: {staff.joinDate}</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex gap-2">
+                      <button className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-rose-100 hover:text-rose-600 transition-colors">
+                        <Mail size={14} />
+                      </button>
+                      <button className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-rose-100 hover:text-rose-600 transition-colors">
+                        <Phone size={14} />
+                      </button>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
+                        <Edit3 size={16} />
+                      </button>
+                      <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                        <MoreVertical size={16} />
+                      </button>
+                    </div>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { 
   LayoutDashboard, IndianRupee, FileSpreadsheet,
-  Receipt, WalletCards, BookOpenCheck, LogOut
+  Receipt, WalletCards, BookOpenCheck, LogOut, BarChart3
 } from "lucide-react";
 
 const menuItems = [
@@ -15,6 +15,7 @@ const menuItems = [
   { name: "Payroll", href: "/admin/accountant/payroll", icon: WalletCards },
   { name: "Scholarships", href: "/admin/accountant/scholarships", icon: BookOpenCheck },
   { name: "Financial Reports", href: "/admin/accountant/reports", icon: FileSpreadsheet },
+  { name: "Financial Analysis", href: "/admin/accountant/analysis", icon: BarChart3 },
 ];
 
 export default function AccountantSidebar() {
