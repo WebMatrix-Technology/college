@@ -39,7 +39,7 @@ export default function CoordinatorSidebar() {
   };
 
   return (
-    <div className="w-72 bg-slate-900 text-white min-h-screen flex flex-col font-sans border-r border-slate-800 shadow-2xl relative z-10 overflow-hidden">
+    <div className="w-72 bg-slate-900 text-white min-h-screen flex flex-col font-sans border-r border-slate-800 shadow-2xl relative z-10 overflow-hidden shrink-0">
       {/* Dynamic Background Effect */}
       <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-fuchsia-600/20 to-transparent pointer-events-none" />
 

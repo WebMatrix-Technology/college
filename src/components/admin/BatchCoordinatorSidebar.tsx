@@ -4,20 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { 
-  LayoutDashboard, 
-  GraduationCap,
-  BookOpen,
-  Clock,
-  LogOut,
-  Target,
-  Users
+  LayoutDashboard, Users, Clock, LogOut, BookOpen, Target, CalendarDays, CheckSquare, BarChart, FileSpreadsheet
 } from "lucide-react";
 
 const navItems = [
   { name: "Batch Overview", href: "/admin/batch-coordinator/dashboard", icon: LayoutDashboard },
-  { name: "Batch Students", href: "/admin/batch-coordinator/students", icon: GraduationCap },
+  { name: "Batch Students", href: "/admin/batch-coordinator/students", icon: Users },
   { name: "Batch Syllabus", href: "/admin/batch-coordinator/subjects", icon: BookOpen },
   { name: "Batch Schedule", href: "/admin/batch-coordinator/timetable", icon: Clock },
+  { name: "Daily Attendance", href: "/admin/batch-coordinator/attendance", icon: CheckSquare },
+  { name: "Internal Marks", href: "/admin/batch-coordinator/marks", icon: FileSpreadsheet },
+  { name: "Event Calendar", href: "/admin/batch-coordinator/calendar", icon: CalendarDays },
+  { name: "Reports", href: "/admin/batch-coordinator/reports", icon: BarChart },
 ];
 
 export default function BatchCoordinatorSidebar() {
@@ -40,7 +38,7 @@ export default function BatchCoordinatorSidebar() {
   };
 
   return (
-    <div className="w-72 bg-slate-900 text-white min-h-screen flex flex-col font-sans border-r border-slate-800 shadow-2xl relative z-10 overflow-hidden">
+    <div className="w-72 bg-slate-900 text-white min-h-screen flex flex-col font-sans border-r border-slate-800 shadow-2xl relative z-10 overflow-hidden shrink-0">
       {/* Dynamic Background Effect */}
       <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-teal-600/20 to-transparent pointer-events-none" />
 
@@ -62,7 +60,7 @@ export default function BatchCoordinatorSidebar() {
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4 px-4">Batch Tools</p>
         
         {navItems.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+          const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/admin/batch-coordinator/dashboard");
           return (
             <Link key={item.name} href={item.href}>
               <motion.div 

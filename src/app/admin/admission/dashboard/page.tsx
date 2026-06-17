@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import AdmissionSidebar from "@/components/admin/AdmissionSidebar";
+import AdmissionBottomNav from "@/components/admin/AdmissionBottomNav";
 
 // --- MOCK TRANSMISSION DATA ---
 const enquiries = [
@@ -65,7 +66,9 @@ export default function AdmissionDashboard() {
     <div className="flex min-h-screen bg-[#020617] text-slate-300 font-sans selection:bg-orange-500 overflow-x-hidden">
       
       {/* 1. DYNAMIC SIDEBAR */}
-      {role && <AdmissionSidebar role={role} />}
+      <div className="hidden md:block z-50">
+        {role && <AdmissionSidebar role={role} />}
+      </div>
 
       {/* 2. MAIN TERMINAL */}
       <main className="flex-1 ml-0 md:ml-72 p-4 md:p-6 lg:p-10 relative">
@@ -244,6 +247,8 @@ export default function AdmissionDashboard() {
 
         </div>
       </main>
+
+      <AdmissionBottomNav />
     </div>
   );
 }
