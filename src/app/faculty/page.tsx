@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { 
  Users, CheckSquare, FileUp, Calendar, 
  Settings, LogOut, ArrowUpRight, Bell, 
- ClipboardList, Briefcase, Mail 
+ ClipboardList, Briefcase, Mail, BookOpen, UploadCloud, MessageSquare 
 } from "lucide-react";
 export default function FacultyDashboard() {
  const router = useRouter();
@@ -38,9 +38,31 @@ export default function FacultyDashboard() {
  color: "bg-blue-600", 
  link: "/faculty/timetable" 
  },
+ { 
+ title: "My Subjects", 
+ detail: "View Assigned Courses", 
+ Icon: BookOpen, 
+ color: "bg-purple-600", 
+ link: "/faculty/subjects" 
+ },
+ { 
+ title: "Materials", 
+ detail: "Upload Notes & Docs", 
+ Icon: UploadCloud, 
+ color: "bg-indigo-600", 
+ link: "/faculty/materials" 
+ },
+ { 
+ title: "Assignments", 
+ detail: "Create & Evaluate", 
+ Icon: ClipboardList, 
+ color: "bg-rose-600", 
+ link: "/faculty/assignments" 
+ },
  ];
 
  const adminTools = [
+ { name: "Student Broadcasts", Icon: MessageSquare, path: "/faculty/communication" },
  { name: "Salary Slips", Icon: Briefcase, path: "/faculty/salary" },
  { name: "Research Portal", Icon: Users, path: "/faculty/research" },
  { name: "Leave Portal", Icon: Mail, path: "/faculty/leave" },

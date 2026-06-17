@@ -33,6 +33,7 @@ export default function StudentsCorner() {
  ];
 
  const sidebarLinks = [
+ { name: "Daily Timetable", Icon: Clock, link: "/students-corner/timetable" },
  { name: "Digital Library", Icon: Laptop, link: "/students-corner/library" },
  { name: "Hall Tickets", Icon: FileText, link: "/students-corner/hall-tickets" },
  { name: "Syllabus 2026", Icon: Download, link: "/students-corner/syllabus" },
@@ -52,12 +53,19 @@ export default function StudentsCorner() {
  </h1>
  </motion.div>
  
- <button 
- onClick={handleLogout}
- className="flex items-center gap-2 bg-white/5 hover:bg-red-600 transition-colors px-4 py-2 text-[10px] font-black uppercase tracking-widest border border-white/10"
- >
- <LogOut size={14} /> Logout
- </button>
+ <div className="flex items-center gap-3">
+    <Link href="/students-corner/profile">
+      <button className="flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500 transition-colors px-4 py-2 text-[10px] font-black uppercase tracking-widest border border-emerald-500/50 rounded-sm">
+        <UserCheck size={14} /> Profile
+      </button>
+    </Link>
+    <button 
+      onClick={handleLogout}
+      className="flex items-center gap-2 bg-white/5 hover:bg-red-600 transition-colors px-4 py-2 text-[10px] font-black uppercase tracking-widest border border-white/10 rounded-sm"
+    >
+      <LogOut size={14} /> Logout
+    </button>
+  </div>
  </div>
 
  <div className="mt-8 flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-sm overflow-hidden">
