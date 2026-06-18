@@ -78,7 +78,7 @@ export default function CTA({
               isDark ? "text-white" : "text-slate-950"
             }`}>
               {title} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 italic">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 italic pr-8 pb-4 inline-block">
                 {titleAccent}
               </span>
             </h2>

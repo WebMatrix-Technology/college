@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin"); // Detects if we are in admin/hr routes
+  const isAdmissionsPage = pathname.startsWith("/admissions");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,8 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               animate={{ opacity: 1 }}
               className="relative"
             >
-              {/* Navbar is HIDDEN for all /admin routes to allow the Admin Sidebar to take control */}
-              {!isAdminPage && <Navbar {...({ isScrolled } as any)} />}
+              {/* Navbar is HIDDEN for all /admin and /admissions routes */}
+              {!isAdminPage && !isAdmissionsPage && <Navbar {...({ isScrolled } as any)} />}
               
               {children}
               <ToastContainer />

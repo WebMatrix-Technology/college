@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -248,8 +249,15 @@ export default function AdmissionPage() {
  
  {/* HERO BANNER */}
  <section className="bg-slate-950 pt-32 pb-24 relative overflow-hidden">
- <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay" />
- <div className="absolute top-0 right-1/4 w-96 h-96 bg-orange-600/20 rounded-full blur-[120px] pointer-events-none" />
+  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay" />
+  <div className="absolute top-0 right-1/4 w-96 h-96 bg-orange-600/20 rounded-full blur-[120px] pointer-events-none" />
+  
+  {/* BACK BUTTON */}
+  <div className="absolute top-8 left-6 md:left-12 z-20">
+  <Link href="/" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-xs font-black text-white uppercase tracking-widest transition-all backdrop-blur-md">
+  <ArrowLeft size={14} /> Home
+  </Link>
+  </div>
  <div className="max-w-[1200px] mx-auto px-6 relative z-10 text-center">
  <motion.h1 
  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
