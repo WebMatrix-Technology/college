@@ -14,6 +14,7 @@ const primaryLinks = [
   { name: "Invigilation", icon: UserCheck, href: "/admin/examination/invigilation" },
   { name: "Results", icon: FileSpreadsheet, href: "/admin/examination/results" },
 ];
+const secondaryLinks: any[] = [];
 
 export default function ExaminationBottomNav() {
   const pathname = usePathname();

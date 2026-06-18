@@ -42,7 +42,7 @@ export default function WebsiteAdminBottomNav() {
           
           <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent pointer-events-none rounded-[2rem]" />
 
-          {primaryLinks.map((item) => {
+          {primaryItems.map((item) => {
             const isActive = pathname === item.href || (pathname.startsWith(item.href) && !item.href.endsWith("/dashboard"));
             return (
               <Link 
@@ -119,7 +119,7 @@ export default function WebsiteAdminBottomNav() {
                </div>
 
                <div className="p-4 grid grid-cols-2 gap-2 max-h-[50vh] overflow-y-auto no-scrollbar relative z-10">
-                 {secondaryLinks.map((item) => {
+                 {moreItems.map((item) => {
                    const isActive = pathname === item.href || pathname.startsWith(item.href);
                    return (
                      <Link key={item.name} href={item.href} onClick={() => setIsMoreOpen(false)}>
