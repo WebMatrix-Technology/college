@@ -5,8 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   LayoutDashboard, Users, GraduationCap, Clock, 
-  Menu, X, BookOpen, LogOut
-, Sparkles } from "lucide-react";
+  Menu, X, BookOpen, LogOut,
+  Sparkles, FileSpreadsheet, FileText, Library
+} from "lucide-react";
 
 const primaryLinks = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/admin/hod/dashboard" },
@@ -16,7 +17,10 @@ const primaryLinks = [
 ];
 
 const secondaryLinks = [
-  { name: "Curriculum", icon: BookOpen, href: "/admin/hod/subjects" },
+  { name: "Syllabus", icon: BookOpen, href: "/admin/hod/subjects" },
+  { name: "Exams", icon: FileSpreadsheet, href: "/admin/hod/exams" },
+  { name: "Content", icon: Library, href: "/admin/hod/content" },
+  { name: "Hall Tickets", icon: FileText, href: "/admin/hod/hall-tickets" },
 ];
 
 export default function HodBottomNav() {

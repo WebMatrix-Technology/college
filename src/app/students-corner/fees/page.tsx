@@ -8,6 +8,7 @@ import {
  Wallet, ArrowUpRight, Lock, Loader2, QrCode,
  Smartphone, Info
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 // --- INITIAL MOCK DATA ---
 const INITIAL_FEES = [
@@ -48,40 +49,40 @@ export default function FeesPortalPage() {
  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
 
  return (
- <main className="min-h-screen bg-[#F8FAFC] p-6 pt-24">
- <div className="max-w-6xl mx-auto">
+ <main className="min-h-screen bg-[#F8FAFC] selection:bg-orange-500 selection:text-white">
  
- {/* --- HEADER --- */}
- <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
- <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
- <Link href="/students-corner" className="group text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 flex items-center gap-2 mb-2 transition">
- <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform"/> Back to Corner
- </Link>
- <h1 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
- Finance <span className="text-orange-600">Node.</span>
- </h1>
- </motion.div>
+ <VanguardHeader 
+    title="Finance" 
+    subtitle="Node." 
+    tag="Payment Portal" 
+    TagIcon={CreditCard} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  >
+    <motion.div 
+    key={pendingAmount}
+    initial={{ scale: 1.1, borderColor: "#ea580c" }}
+    animate={{ scale: 1, borderColor: "transparent" }}
+    className="mt-12 bg-white border border-slate-100 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.1)] rounded-2xl md:absolute md:right-0 md:bottom-0 md:mb-12 md:mr-6 min-w-[280px]"
+    >
+    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Outstanding</p>
+    <p className="text-4xl font-black text-slate-900 italic">₹{pendingAmount.toLocaleString()}</p>
+    </motion.div>
+  </VanguardHeader>
 
- <motion.div 
- key={pendingAmount}
- initial={{ scale: 1.1, borderColor: "#ea580c" }}
- animate={{ scale: 1, borderColor: "#0f172a" }}
- className="bg-white border-2 border-slate-900 p-6 shadow-[8px_8px_0px_#0f172a] min-w-[280px]"
- >
- <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Outstanding</p>
- <p className="text-4xl font-black text-slate-900 italic">₹{pendingAmount.toLocaleString()}</p>
- </motion.div>
- </div>
+  <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
 
- <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
- 
- <div className="lg:col-span-2 space-y-8">
- <div className="bg-white border border-slate-200 shadow-sm overflow-hidden">
- <div className="bg-slate-900 p-4 text-white flex justify-between items-center">
- <h3 className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
- <Receipt size={14} className="text-orange-500" /> Current Dues Breakdown
- </h3>
- </div>
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  
+  <div className="lg:col-span-2 space-y-8">
+  <div className="bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl overflow-hidden relative">
+  <div className="absolute top-0 left-0 w-1 h-full bg-orange-600"></div>
+  <div className="bg-slate-900 p-6 text-white flex justify-between items-center rounded-t-2xl">
+  <h3 className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+  <Receipt size={14} className="text-orange-500" /> Current Dues Breakdown
+  </h3>
+  </div>
  
  <div className="divide-y divide-slate-100">
  {fees.map((item) => (
@@ -114,12 +115,12 @@ export default function FeesPortalPage() {
  </div>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-emerald-600 p-8 text-white relative overflow-hidden group">
+ <div className="bg-emerald-600 p-8 text-white relative overflow-hidden group rounded-2xl shadow-xl">
  <Wallet className="absolute -right-4 -bottom-4 opacity-20 group-hover:scale-110 transition-transform" size={100} />
  <h4 className="text-xl font-black uppercase italic mb-2">Scholarship Status</h4>
  <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">Merit waiver: Active (10%)</p>
  </div>
- <div className="bg-slate-100 p-8 border-2 border-slate-900 relative">
+ <div className="bg-slate-50 p-8 border border-slate-200 relative rounded-2xl shadow-xl">
  <History className="absolute -right-4 -bottom-4 opacity-5 text-slate-900" size={100} />
  <h4 className="text-xl font-black uppercase italic mb-2 text-slate-900">Tax Benefits</h4>
  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Download 80C Certificates</p>
@@ -129,7 +130,7 @@ export default function FeesPortalPage() {
 
  {/* RIGHT: UPDATED PAYMENT GATEWAY WITH QR TOGGLE */}
  <div className="space-y-6">
- <div className="bg-white border-2 border-slate-900 p-8 shadow-[12px_12px_0px_#ea580c] sticky top-24">
+ <div className="bg-white border border-slate-200 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl sticky top-24">
  <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
  <h3 className="text-xl font-black uppercase italic tracking-tighter text-slate-900 flex items-center gap-2">
  <Lock className="text-orange-600" size={18} /> Secure Checkout
@@ -137,16 +138,16 @@ export default function FeesPortalPage() {
  </div>
 
  {/* Payment Method Switcher */}
- <div className="flex gap-2 mb-8 bg-slate-50 p-1">
+ <div className="flex gap-2 mb-8 bg-slate-50 p-1 rounded-2xl border border-slate-100">
  <button 
  onClick={() => setPaymentMethod("card")}
- className={`flex-1 py-3 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all ${paymentMethod === 'card' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
+ className={`flex-1 py-3 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-xl ${paymentMethod === 'card' ? 'bg-white shadow-sm text-slate-900 border border-slate-200' : 'text-slate-400 hover:text-slate-600'}`}
  >
  <CreditCard size={14} /> Card
  </button>
  <button 
  onClick={() => setPaymentMethod("qr")}
- className={`flex-1 py-3 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all ${paymentMethod === 'qr' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
+ className={`flex-1 py-3 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all rounded-xl ${paymentMethod === 'qr' ? 'bg-white shadow-sm text-slate-900 border border-slate-200' : 'text-slate-400 hover:text-slate-600'}`}
  >
  <QrCode size={14} /> QR Scan
  </button>
@@ -161,7 +162,7 @@ export default function FeesPortalPage() {
  >
  <div className="space-y-2">
  <p className="text-[9px] font-black uppercase text-slate-400">Card Number</p>
- <div className="h-12 w-full border border-slate-200 bg-slate-50 flex items-center px-4 text-slate-400 italic text-xs">
+ <div className="h-12 w-full border border-slate-200 bg-slate-50 flex items-center px-4 text-slate-400 italic text-xs rounded-xl">
  XXXX XXXX XXXX XXXX
  </div>
  </div>
@@ -173,7 +174,7 @@ export default function FeesPortalPage() {
  >
  {pendingAmount > 0 ? (
  <>
- <div className="p-4 border-2 border-slate-900 mb-4 bg-white">
+ <div className="p-4 border border-slate-200 mb-4 bg-white rounded-2xl">
  <img src={qrCodeUrl} alt="Payment QR" className="w-40 h-40" />
  </div>
  <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
@@ -189,7 +190,7 @@ export default function FeesPortalPage() {
  )}
  </AnimatePresence>
 
- <div className="pt-4 border-t-2 border-slate-900 flex justify-between items-end mb-8">
+ <div className="pt-4 border-t border-slate-100 flex justify-between items-end mb-8 mt-4">
  <p className="text-[10px] font-black uppercase text-slate-400">Grand Total</p>
  <p className="text-3xl font-black text-orange-600 italic leading-none">₹{pendingAmount.toLocaleString()}</p>
  </div>
@@ -197,7 +198,7 @@ export default function FeesPortalPage() {
  <button 
  onClick={handlePayment}
  disabled={isProcessing || pendingAmount === 0}
- className="w-full bg-slate-900 text-white py-5 font-black uppercase text-xs tracking-[0.3em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:bg-slate-100 disabled:text-slate-400"
+ className="w-full bg-slate-900 text-white py-5 font-black rounded-2xl uppercase text-xs tracking-[0.3em] hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:bg-slate-100 disabled:text-slate-400 shadow-xl"
  >
  {isProcessing ? (
  <><Loader2 className="animate-spin" size={18} /> Verifying...</>
@@ -208,7 +209,7 @@ export default function FeesPortalPage() {
  )}
  </button>
 
- <div className="mt-8 flex items-center gap-2 bg-blue-50 p-4 border border-blue-100">
+ <div className="mt-8 flex items-center gap-2 bg-blue-50/50 p-4 border border-blue-100 rounded-2xl">
  <Info size={16} className="text-blue-600 shrink-0" />
  <p className="text-[8px] font-bold text-blue-800 uppercase leading-tight">
  After scanning the QR and paying on your mobile, click "Confirm QR Payment" to sync your ledger.
@@ -217,24 +218,24 @@ export default function FeesPortalPage() {
  </div>
  </div>
  </div>
+ </section>
 
  {/* --- SUCCESS MODAL --- */}
  <AnimatePresence>
  {showSuccess && (
  <div className="fixed inset-0 z-[150] flex items-center justify-center p-6">
  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-slate-950/80 backdrop-blur-md" />
- <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white w-full max-w-md p-12 text-center relative z-10 border-t-8 border-emerald-500 shadow-2xl">
- <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8">
+ <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white w-full max-w-md p-12 text-center relative z-10 rounded-2xl border-t-8 border-emerald-500 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+ <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
  <CheckCircle2 size={40} />
  </div>
  <h3 className="text-3xl font-black uppercase italic tracking-tighter text-slate-900 mb-2">Ledger Updated.</h3>
- <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-10">Your transaction has been confirmed on the V-Gate node.</p>
- <button onClick={() => setShowSuccess(false)} className="w-full border-2 border-slate-900 py-4 font-black uppercase text-xs tracking-widest hover:bg-slate-900 hover:text-white transition-all">Return to Dashboard</button>
+ <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-10">Your transaction has been confirmed on the Vanguard node.</p>
+ <button onClick={() => setShowSuccess(false)} className="w-full bg-slate-900 py-4 font-black rounded-2xl text-white uppercase text-xs tracking-widest hover:bg-emerald-600 transition-all shadow-xl">Return to Dashboard</button>
  </motion.div>
  </div>
  )}
  </AnimatePresence>
- </div>
  </main>
  );
 }

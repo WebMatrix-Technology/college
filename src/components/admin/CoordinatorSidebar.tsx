@@ -10,15 +10,19 @@ import {
   Clock,
   LogOut,
   Target,
-  Users
+  Users,
+  Library,
+  FileText
 } from "lucide-react";
 
 const navItems = [
   { name: "Course Overview", href: "/admin/coordinator/dashboard", icon: LayoutDashboard },
   { name: "Enrolled Students", href: "/admin/coordinator/students", icon: GraduationCap },
-  { name: "Course Curriculum", href: "/admin/coordinator/subjects", icon: BookOpen },
+  { name: "Syllabus", href: "/admin/coordinator/subjects", icon: BookOpen },
   { name: "Batch Timetable", href: "/admin/coordinator/timetable", icon: Clock },
   { name: "Course Faculty", href: "/admin/coordinator/faculty", icon: Users },
+  { name: "Course Content", href: "/admin/coordinator/content", icon: Library },
+  { name: "Hall Tickets", href: "/admin/coordinator/hall-tickets", icon: FileText },
 ];
 
 export default function CoordinatorSidebar() {

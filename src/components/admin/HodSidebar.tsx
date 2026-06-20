@@ -10,15 +10,21 @@ import {
   BookOpen,
   Clock,
   LogOut,
-  Building2
+  Building2,
+  FileSpreadsheet,
+  FileText,
+  Library
 } from "lucide-react";
 
 const navItems = [
   { name: "Dashboard", href: "/admin/hod/dashboard", icon: LayoutDashboard },
   { name: "Department Faculty", href: "/admin/hod/faculty", icon: Users },
   { name: "Student Roster", href: "/admin/hod/students", icon: GraduationCap },
-  { name: "Subject Curriculum", href: "/admin/hod/subjects", icon: BookOpen },
+  { name: "Syllabus", href: "/admin/hod/subjects", icon: BookOpen },
   { name: "Master Timetable", href: "/admin/hod/timetable", icon: Clock },
+  { name: "Exam Schedule", href: "/admin/hod/exams", icon: FileSpreadsheet },
+  { name: "Course Content", href: "/admin/hod/content", icon: Library },
+  { name: "Hall Tickets", href: "/admin/hod/hall-tickets", icon: FileText },
 ];
 
 export default function HodSidebar() {

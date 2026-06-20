@@ -71,8 +71,8 @@ export default function CurriculumPage() {
  <section className="py-20">
  <div className="max-w-[1400px] mx-auto px-6">
  
- {/* Sticky Filter Bar */}
- <div className="sticky top-24 z-40 bg-white/80 backdrop-blur-xl border border-slate-200 rounded-2xl p-4 mb-12 shadow-[0_10px_40px_rgb(0,0,0,0.05)] overflow-x-auto hide-scrollbar">
+ {/* Filter Bar */}
+ <div className="bg-white border border-slate-200 rounded-2xl p-4 mb-12 shadow-[0_10px_40px_rgb(0,0,0,0.05)] overflow-x-auto no-scrollbar">
  <div className="flex items-center gap-2 min-w-max">
  {categories.map((cat) => (
  <button

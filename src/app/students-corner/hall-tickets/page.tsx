@@ -11,6 +11,7 @@ import {
  AlertTriangle,
  QrCode
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 export default function HallTicketPage() {
  const examSchedule = [
@@ -20,25 +21,23 @@ export default function HallTicketPage() {
  ];
 
  return (
- <main className="min-h-screen bg-[#F8FAFC] pb-20">
- {/* --- TOP HEADER --- */}
- <section className="bg-slate-950 pt-32 pb-16 px-6">
- <div className="max-w-5xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
- <span className="text-orange-500 font-black uppercase tracking-[0.5em] text-[10px]">Examination Portal</span>
- <h1 className="text-5xl md:text-7xl font-black text-white uppercase italic tracking-tighter mt-4 leading-none">
- Hall <span className="text-orange-600">Ticket.</span>
- </h1>
- </motion.div>
- </div>
- </section>
+ <main className="min-h-screen bg-[#F8FAFC] pb-20 selection:bg-orange-500 selection:text-white">
+ <VanguardHeader 
+    title="Hall" 
+    subtitle="Ticket." 
+    tag="Examination Portal" 
+    TagIcon={QrCode} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  />
 
- <section className="max-w-5xl mx-auto px-6 -mt-10 relative z-20">
+ <section className="max-w-7xl mx-auto px-6 -mt-10 relative z-20">
  <div className="grid lg:grid-cols-12 gap-8">
  
  {/* LEFT: THE TICKET PREVIEW */}
  <div className="lg:col-span-8">
- <div className="bg-white border border-slate-200 shadow-2xl overflow-hidden print:shadow-none print:border-none">
+ <div className="bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl overflow-hidden print:shadow-none print:border-none print:rounded-none">
  
  {/* Ticket Header */}
  <div className="bg-slate-50 p-8 border-b border-slate-100 flex justify-between items-center">
@@ -121,12 +120,12 @@ export default function HallTicketPage() {
  <div className="lg:col-span-4 space-y-6">
  <button 
  onClick={() => window.print()}
- className="w-full bg-orange-600 hover:bg-slate-900 text-white p-6 font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all shadow-2xl"
+ className="w-full bg-slate-900 hover:bg-orange-600 text-white p-6 font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all rounded-2xl shadow-xl"
  >
  <Download size={18} /> Download PDF
  </button>
  
- <div className="bg-white border border-slate-100 p-8 shadow-xl">
+ <div className="bg-white border border-slate-200 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl">
  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-900 mb-6 flex items-center gap-2">
  <AlertTriangle className="text-orange-600" size={14} /> Exam Rules
  </h4>
@@ -144,12 +143,14 @@ export default function HallTicketPage() {
  </ul>
  </div>
 
- <div className="bg-slate-900 p-8 text-white">
- <Printer className="text-orange-600 mb-4" />
- <p className="text-[10px] font-bold uppercase tracking-widest opacity-60">Print Support</p>
- <p className="text-xs font-medium leading-relaxed mt-2">
+ <div className="bg-gradient-to-br from-orange-600 to-red-600 p-8 text-white rounded-2xl shadow-2xl relative overflow-hidden group">
+ <Printer className="absolute -right-4 -bottom-4 opacity-20 transform group-hover:scale-110 transition-transform duration-700" size={120} />
+ <div className="relative z-10">
+ <h4 className="text-xl font-black uppercase tracking-tight mb-2">Print Support</h4>
+ <p className="text-xs font-medium leading-relaxed mt-2 opacity-90">
  If the barcode is not visible, try printing in **Portrait Mode** with 100% scale.
  </p>
+ </div>
  </div>
  </div>
 

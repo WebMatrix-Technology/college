@@ -5,8 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   LayoutDashboard, GraduationCap, Clock, Users, 
-  Menu, X, BookOpen, LogOut
-, Sparkles } from "lucide-react";
+  Menu, X, BookOpen, LogOut,
+  Sparkles, Library, FileText
+} from "lucide-react";
 
 const primaryLinks = [
   { name: "Overview", icon: LayoutDashboard, href: "/admin/coordinator/dashboard" },
@@ -16,7 +17,9 @@ const primaryLinks = [
 ];
 
 const secondaryLinks = [
-  { name: "Curriculum", icon: BookOpen, href: "/admin/coordinator/subjects" },
+  { name: "Syllabus", icon: BookOpen, href: "/admin/coordinator/subjects" },
+  { name: "Content", icon: Library, href: "/admin/coordinator/content" },
+  { name: "Hall Tickets", icon: FileText, href: "/admin/coordinator/hall-tickets" },
 ];
 
 export default function CoordinatorBottomNav() {

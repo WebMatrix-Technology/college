@@ -53,7 +53,7 @@ export default function LandingPage() {
  <Link href="/admissions" className="group px-10 py-5 bg-white text-slate-950 font-black uppercase tracking-[0.2em] text-xs rounded-full hover:bg-orange-500 hover:text-white transition-colors flex items-center justify-center">
  Start Application <ArrowRight size={14} className="ml-3 group-hover:translate-x-1 transition-transform" />
  </Link>
- <Link href="/campus" className="group px-8 py-5 bg-white/5 text-white font-black uppercase tracking-[0.2em] text-xs rounded-full hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-md flex items-center justify-center gap-3">
+ <Link href="/campus/tour" className="group px-8 py-5 bg-white/5 text-white font-black uppercase tracking-[0.2em] text-xs rounded-full hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-md flex items-center justify-center gap-3">
  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-slate-900 transition-colors">
  <Play size={10} className="fill-current" />
  </div>

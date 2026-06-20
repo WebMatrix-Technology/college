@@ -87,14 +87,14 @@ export default function CampusPage() {
  transition={{ delay: 0.6, duration: 0.8 }}
  className="hidden lg:flex justify-end"
  >
- <div className="relative w-72 h-96 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl group">
+ <Link href="/campus/tour" className="relative w-72 h-96 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl group cursor-pointer block">
  <div className="absolute inset-0 bg-orange-600/20 group-hover:bg-orange-600/0 transition-colors duration-500 z-10" />
  <img src="/library/collegelib.jpg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Campus Life" />
- <div className="absolute bottom-6 left-6 right-6 z-20 backdrop-blur-md bg-black/40 border border-white/10 p-4 rounded-2xl">
+ <div className="absolute bottom-6 left-6 right-6 z-20 backdrop-blur-md bg-black/40 border border-white/10 p-4 rounded-2xl group-hover:-translate-y-2 transition-transform duration-500">
  <p className="text-white font-bold text-sm">Virtual Tour</p>
  <p className="text-white/50 text-[10px] uppercase tracking-wider mt-1">Immersive 360° View</p>
  </div>
- </div>
+ </Link>
  </motion.div>
  </div>
  </section>

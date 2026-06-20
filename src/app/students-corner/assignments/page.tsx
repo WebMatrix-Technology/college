@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { 
  ArrowLeft, ClipboardList, Clock, CheckCircle2, 
- AlertCircle, Upload, FileText, Loader2
+ AlertCircle, Upload, FileText, Loader2, FolderOpen
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 // Mock Data
 const INITIAL_DATA = [
@@ -48,35 +49,33 @@ export default function StudentAssignments() {
  );
 
  return (
- <main className="min-h-screen bg-[#FDFDFD] p-6 pt-24 font-sans text-slate-900">
- <div className="max-w-6xl mx-auto">
- 
- {/* --- HEADER --- */}
- <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
- <div>
- <Link href="/students-corner" className="group text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 flex items-center gap-2 mb-4 transition">
- <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform"/> Command Center
- </Link>
- <h1 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
- Project <span className="text-orange-600">Vault.</span>
- </h1>
- <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mt-3">Node: Assignments_Queue // Session 2026</p>
- </div>
+ <main className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
+  
+  <VanguardHeader 
+    title="Project" 
+    subtitle="Vault." 
+    tag="Assignments_Queue // Session 2026" 
+    TagIcon={FolderOpen} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  >
+    <div className="mt-12 bg-slate-950/40 backdrop-blur-md border border-white/10 p-6 rounded-2xl shadow-2xl w-full md:absolute md:right-0 md:bottom-0 md:mb-12 md:mr-6 md:w-72">
+    <div className="flex justify-between items-end mb-2">
+    <span className="text-[9px] font-black uppercase text-slate-300">Total Completion</span>
+    <span className="text-xl font-black italic text-orange-500">{progressPerc.toFixed(0)}%</span>
+    </div>
+    <div className="w-full h-2 bg-slate-900/50 rounded-full overflow-hidden">
+    <motion.div 
+    initial={{ width: 0 }}
+    animate={{ width: `${progressPerc}%` }}
+    className="h-full bg-orange-500 rounded-full"
+    />
+    </div>
+    </div>
+  </VanguardHeader>
 
- <div className="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm w-full md:w-72">
- <div className="flex justify-between items-end mb-2">
- <span className="text-[9px] font-black uppercase text-slate-400">Total Completion</span>
- <span className="text-xl font-black italic text-orange-600">{progressPerc.toFixed(0)}%</span>
- </div>
- <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
- <motion.div 
- initial={{ width: 0 }}
- animate={{ width: `${progressPerc}%` }}
- className="h-full bg-orange-600 rounded-full"
- />
- </div>
- </div>
- </div>
+  <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
 
  {/* --- WORKING FILTERS --- */}
  <div className="flex gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
@@ -105,7 +104,7 @@ export default function StudentAssignments() {
  initial={{ opacity: 0, scale: 0.95 }}
  animate={{ opacity: 1, scale: 1 }}
  exit={{ opacity: 0, scale: 0.95 }}
- className="bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all group relative overflow-hidden"
+ className="bg-white border border-slate-200 p-8 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-2xl transition-all group relative overflow-hidden"
  >
  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
  <div className="flex gap-6 items-center">
@@ -158,7 +157,7 @@ export default function StudentAssignments() {
  <footer className="mt-20 py-10 border-t border-slate-100 text-center opacity-30">
  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[1em]">Vanguard Submission Protocol // 2026</p>
  </footer>
- </div>
+ </section>
  </main>
  );
 }

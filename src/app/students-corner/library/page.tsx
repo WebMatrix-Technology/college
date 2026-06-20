@@ -8,6 +8,7 @@ import {
  Info, Library, Hash, Globe, Eye,
  Download, Zap, ShieldCheck, AlertTriangle
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 // --- ENHANCED BOOK DATA ---
 const BOOKS = [
@@ -51,51 +52,32 @@ export default function LibraryPage() {
  };
 
  return (
- <main className="min-h-screen bg-[#FDFDFD] font-sans">
+ <main className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-orange-500 selection:text-white">
  
- {/* --- TOP HUD NAVIGATION --- */}
- <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100 px-6 py-4">
- <div className="max-w-7xl mx-auto flex justify-between items-center">
- <Link href="/students-corner" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-all group">
- <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Registry Core
- </Link>
- <div className="flex items-center gap-4">
- <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Node Status:</span>
- <div className="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100">
- <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
- <span className="text-[9px] font-black uppercase">Online</span>
- </div>
- </div>
- </div>
- </nav>
+ <VanguardHeader 
+    title="Digital" 
+    subtitle="Archives." 
+    tag="Knowledge Repository" 
+    TagIcon={Library} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  >
+    <div className="mt-12 flex items-center gap-6 bg-slate-950/40 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/10 md:absolute md:right-0 md:bottom-0 md:mb-12 md:mr-6">
+    <div className="text-center px-6">
+    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Active Loans</p>
+    <p className="text-3xl font-black text-white italic">03</p>
+    </div>
+    <div className="w-px h-12 bg-white/10" />
+    <div className="text-center px-6">
+    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Node Credits</p>
+    <p className="text-3xl font-black text-orange-500 italic">840</p>
+    </div>
+    </div>
+  </VanguardHeader>
 
- <section className="pt-32 pb-20 max-w-7xl mx-auto px-6">
+ <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
  
- {/* --- HEADER --- */}
- <div className="flex flex-col lg:flex-row justify-between items-end gap-10 mb-16">
- <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
- <div className="flex items-center gap-3 mb-4">
- <Zap className="text-orange-600" size={20} />
- <span className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400">Knowledge Repository</span>
- </div>
- <h1 className="text-7xl md:text-8xl font-black uppercase italic tracking-tighter text-slate-950 leading-[0.85]">
- Digital <br /> <span className="text-transparent stroke-slate-950" style={{ WebkitTextStroke: '2px #020617' }}>Archives.</span>
- </h1>
- </motion.div>
-
- <div className="flex items-center gap-6 bg-slate-950 p-6 rounded-[2rem] shadow-2xl border border-white/10">
- <div className="text-center px-6">
- <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Active Loans</p>
- <p className="text-3xl font-black text-white italic">03</p>
- </div>
- <div className="w-px h-12 bg-white/10" />
- <div className="text-center px-6">
- <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Node Credits</p>
- <p className="text-3xl font-black text-orange-500 italic">840</p>
- </div>
- </div>
- </div>
-
  {/* --- DYNAMIC FILTER BAR --- */}
  <div className="flex flex-col md:flex-row gap-6 mb-12">
  <div className="relative flex-1 group">

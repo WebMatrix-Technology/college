@@ -16,6 +16,7 @@ import {
  Server,
  ShieldCheck
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 export default function CourseContentPage() {
  const [searchTerm, setSearchTerm] = useState("");
@@ -69,29 +70,22 @@ export default function CourseContentPage() {
  };
 
  return (
- <main className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
+ <main className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
  
- {/* --- NAVIGATION --- */}
- <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4">
- <div className="max-w-7xl mx-auto flex justify-between items-center">
- <Link href="/students-corner" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 transition-all">
- <ChevronLeft size={14} /> Back to Corner
- </Link>
- <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">VIT Academic Portal</span>
- </div>
- </nav>
+ <VanguardHeader 
+    title="Course" 
+    subtitle="Content." 
+    tag="Spring Semester 2026 Curriculum" 
+    TagIcon={BookOpen} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  />
 
- <section className="pt-40 pb-20 max-w-7xl mx-auto px-6">
- 
- {/* --- HEADER & SEARCH --- */}
- <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
- <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
- <h1 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
- Course <br /> <span className="text-orange-600">Content.</span>
- </h1>
- <p className="mt-6 text-slate-400 text-sm font-bold uppercase tracking-widest">Spring Semester 2026 Curriculum</p>
- </motion.div>
-
+  <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
+  
+  {/* --- SEARCH --- */}
+  <div className="flex flex-col md:flex-row md:items-end justify-end gap-8 mb-12">
  <div className="relative w-full md:w-80">
  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
  <input 
