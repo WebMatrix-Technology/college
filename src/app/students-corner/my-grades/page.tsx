@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { 
  ArrowLeft, Printer, BookOpen, CheckCircle, 
- Loader2, AlertTriangle, GraduationCap, XCircle 
+ Loader2, AlertTriangle, GraduationCap, XCircle, FileBarChart2 
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 // DATA: Full 6 Semesters
 const STUDENT_RESULTS = [
@@ -94,24 +94,23 @@ export default function MyGradesPage() {
  );
 
  return (
- <main className="min-h-screen bg-[#F8FAFC] p-6 pt-24 font-sans ">
- <div className="max-w-7xl mx-auto">
+ <main className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-orange-500 selection:text-white">
  
- {/* --- HEADER --- */}
- <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
- <div>
- <Link href="/students-corner" className="group text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 flex items-center gap-2 mb-2 transition">
- <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform"/> Back to Dashboard
- </Link>
- <h1 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
- Exam <span className="text-orange-600">Marksheet.</span>
- </h1>
- <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mt-3">Candidate: Rahul Singh // VIT2026001</p>
- </div>
- <button onClick={() => window.print()} className="px-6 py-4 bg-white border border-slate-200 text-slate-600 font-black uppercase text-[10px] tracking-widest hover:border-slate-900 transition-all flex items-center gap-2 shadow-sm active:scale-95">
- <Printer size={16} /> Print Marksheet
- </button>
- </div>
+ <VanguardHeader 
+    title="Exam" 
+    subtitle="Marksheet." 
+    tag="Candidate: Rahul Singh // VIT2026001" 
+    TagIcon={FileBarChart2} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  >
+    <button onClick={() => window.print()} className="mt-12 px-6 py-4 bg-slate-950/40 backdrop-blur-md border border-white/10 text-white font-black uppercase text-[10px] tracking-widest hover:bg-orange-600 transition-all flex items-center gap-2 rounded-2xl shadow-2xl active:scale-95 md:absolute md:right-0 md:bottom-0 md:mb-12 md:mr-6">
+    <Printer size={16} /> Print Marksheet
+    </button>
+  </VanguardHeader>
+
+  <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
 
  {/* --- SEMESTER TABS --- */}
  <div className="flex gap-2 overflow-x-auto no-scrollbar pb-6 mb-10">
@@ -149,7 +148,7 @@ export default function MyGradesPage() {
  <div className="flex-1 h-px bg-slate-200" />
  </div>
 
- <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-hidden">
+ <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
  <table className="w-full text-left border-collapse">
  <thead>
  <tr className="bg-slate-50/50 border-b border-slate-100">
@@ -198,7 +197,7 @@ export default function MyGradesPage() {
  ))}
  </AnimatePresence>
  </div>
- </div>
+ </section>
  </main>
  );
 }

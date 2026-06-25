@@ -5,8 +5,9 @@ import Link from "next/link";
 import { 
  ArrowLeft, Trophy, MapPin, Calendar, 
  Search, CheckCircle, XCircle, Loader2, 
- ArrowUpRight, Building2, Briefcase
+ ArrowUpRight, Building2, Briefcase, Network
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 // Mock Data for Campus Drives
 const INITIAL_DRIVES = [
@@ -46,45 +47,42 @@ export default function PlacementPage() {
  );
 
  return (
- <main className="min-h-screen bg-[#FDFDFD] p-6 pt-24 font-sans text-slate-900">
- <div className="max-w-6xl mx-auto">
- 
- {/* --- HEADER --- */}
- <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
- <div>
- <Link href="/students-corner" className="group text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 flex items-center gap-2 mb-4 transition">
- <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform"/> Command Center
- </Link>
- <h1 className="text-5xl md:text-6xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
- Career <span className="text-orange-600">Drives.</span>
- </h1>
- <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mt-3">Node: Placement_Hub // Recruitment 2026</p>
- </div>
+  <main className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
+  
+  <VanguardHeader 
+    title="Career" 
+    subtitle="Drives." 
+    tag="Node: Placement_Hub // Recruitment 2026" 
+    TagIcon={Network} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  >
+    <div className="mt-12 bg-slate-950/40 backdrop-blur-md p-6 rounded-2xl text-white shadow-2xl flex gap-8 md:absolute md:right-0 md:bottom-0 md:mb-12 md:mr-6 border border-white/10">
+    <div>
+    <p className="text-[8px] font-black uppercase tracking-widest text-slate-300">Active Drives</p>
+    <p className="text-xl font-black italic">{drives.length}</p>
+    </div>
+    <div className="w-px h-8 bg-slate-800/50" />
+    <div>
+    <p className="text-[8px] font-black uppercase tracking-widest text-slate-300">Applied</p>
+    <p className="text-xl font-black italic text-orange-500">{drives.filter(d => d.applied).length}</p>
+    </div>
+    </div>
+  </VanguardHeader>
 
- {/* Stats Bar */}
- <div className="bg-slate-950 p-6 rounded-3xl text-white shadow-xl flex gap-8">
- <div>
- <p className="text-[8px] font-black uppercase tracking-widest text-slate-500">Active Drives</p>
- <p className="text-xl font-black italic">{drives.length}</p>
- </div>
- <div className="w-px h-8 bg-slate-800" />
- <div>
- <p className="text-[8px] font-black uppercase tracking-widest text-slate-500">Applied</p>
- <p className="text-xl font-black italic text-orange-500">{drives.filter(d => d.applied).length}</p>
- </div>
- </div>
- </div>
+  <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
 
  {/* --- SEARCH BOX --- */}
  <div className="relative mb-10 group">
  <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-orange-600 transition-colors" size={20} />
- <input 
- type="text" 
- placeholder="SEARCH COMPANY OR ROLE..." 
- value={searchTerm}
- onChange={(e) => setSearchTerm(e.target.value)}
- className="w-full bg-white border-2 border-slate-100 p-6 pl-16 rounded-[2rem] outline-none focus:border-orange-500 font-black text-[10px] uppercase tracking-widest shadow-sm transition-all"
- />
+  <input 
+  type="text" 
+  placeholder="SEARCH COMPANY OR ROLE..." 
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  className="w-full bg-white border border-slate-200 p-6 pl-16 rounded-[2rem] outline-none focus:border-orange-500 font-black text-[10px] uppercase tracking-widest shadow-sm transition-all"
+  />
  </div>
 
  {/* --- DRIVES LIST --- */}
@@ -95,9 +93,9 @@ export default function PlacementPage() {
  key={drive.id}
  layout
  initial={{ opacity: 0, y: 20 }}
- animate={{ opacity: 1, y: 0 }}
- className="bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all group overflow-hidden relative"
- >
+  animate={{ opacity: 1, y: 0 }}
+  className="bg-white border border-slate-200 p-8 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-2xl transition-all group overflow-hidden relative"
+  >
  {/* Background Icon Watermark */}
  <Building2 className="absolute -right-10 -bottom-10 text-slate-50 opacity-0 group-hover:opacity-100 transition-opacity" size={200} />
 
@@ -157,11 +155,11 @@ export default function PlacementPage() {
  </AnimatePresence>
  </div>
 
- {/* --- FOOTER --- */}
- <footer className="mt-20 py-10 border-t border-slate-100 text-center opacity-30">
- <p className="text-[10px] font-black text-slate-400 uppercase tracking-[1em]">Vanguard Placement Protocol // 2026</p>
- </footer>
- </div>
- </main>
+  {/* --- FOOTER --- */}
+  <footer className="mt-20 py-10 border-t border-slate-100 text-center opacity-30">
+  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[1em]">Vanguard Recruitment System // Session 2026</p>
+  </footer>
+  </section>
+  </main>
  );
 }

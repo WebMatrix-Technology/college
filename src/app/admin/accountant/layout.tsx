@@ -1,7 +1,12 @@
-"use client";
 import React from "react";
+import { Metadata } from "next";
 import AccountantSidebar from "@/components/admin/AccountantSidebar";
 import AccountantBottomNav from "@/components/admin/AccountantBottomNav";
+
+export const metadata: Metadata = {
+  title: "Accountant Portal | Vanguard",
+  description: "Accountant dashboard for managing fees, salary, and expenses.",
+};
 
 export default function AccountantLayout({
   children,

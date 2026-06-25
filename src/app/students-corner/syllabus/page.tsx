@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
  ArrowLeft, Download, BookOpen, Layers, 
  ChevronDown, FileText, Search, GraduationCap,
- CheckCircle2, Info
+ CheckCircle2, Info, GraduationCap as GraduationCapIcon
 } from "lucide-react";
+import VanguardHeader from "@/components/VanguardHeader";
 
 // Mock Syllabus Data
 const SYLLABUS_DATA = [
@@ -52,31 +53,27 @@ export default function SyllabusPage() {
  };
 
  return (
- <main className="min-h-screen bg-[#F8FAFC] p-6 pt-24">
- <div className="max-w-6xl mx-auto">
+ <main className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-orange-500 selection:text-white">
  
- {/* --- HEADER --- */}
- <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
- <div>
- <Link href="/students-corner" className="group text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 flex items-center gap-2 mb-2 transition">
- <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform"/> Back to Corner
- </Link>
- <h1 className="text-4xl md:text-5xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
- Academic <span className="text-orange-600">Curriculum.</span>
- </h1>
- <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-2">
- B.Tech Computer Science | Regulation 2026-R1
- </p>
- </div>
+ <VanguardHeader 
+    title="Academic" 
+    subtitle="Curriculum." 
+    tag="B.Tech Computer Science | Regulation 2026-R1" 
+    TagIcon={GraduationCapIcon} 
+    primaryColor="orange"
+    showBack={true}
+    backHref="/students-corner"
+  >
+    <div className="mt-12 bg-slate-950/40 backdrop-blur-md border border-white/10 text-white p-6 rounded-2xl shadow-2xl flex items-center gap-4 md:absolute md:right-0 md:bottom-0 md:mb-12 md:mr-6">
+    <GraduationCap className="text-orange-500" size={24} />
+    <div>
+    <p className="text-[9px] font-black uppercase tracking-widest text-slate-300">Total Credits</p>
+    <p className="text-xl font-black italic">164.0 <span className="text-[10px] opacity-40">Required</span></p>
+    </div>
+    </div>
+  </VanguardHeader>
 
- <div className="bg-slate-900 text-white p-5 rounded-sm shadow-xl flex items-center gap-4">
- <GraduationCap className="text-orange-500" size={24} />
- <div>
- <p className="text-[9px] font-black uppercase text-slate-400">Total Credits</p>
- <p className="text-xl font-black italic">164.0 <span className="text-[10px] opacity-40">Required</span></p>
- </div>
- </div>
- </div>
+  <section className="py-12 max-w-7xl mx-auto px-6 relative z-20 -mt-8">
 
  {/* --- SEMESTER FILTER TABS --- */}
  <div className="flex flex-wrap gap-4 mb-10">
@@ -105,7 +102,7 @@ export default function SyllabusPage() {
  animate={{ opacity: 1, y: 0 }}
  exit={{ opacity: 0, scale: 0.95 }}
  key={course.id}
- className="bg-white border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all"
+ className="bg-white border border-slate-200 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl hover:shadow-2xl transition-all"
  >
  {/* Accordion Trigger */}
  <div 
@@ -199,7 +196,7 @@ export default function SyllabusPage() {
  <footer className="mt-20 text-center pb-10">
  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[1em]">Vanguard Curriculum Node • 2026</p>
  </footer>
- </div>
+ </section>
  </main>
  );
 }
